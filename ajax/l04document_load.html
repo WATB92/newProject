@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html 이 로딩되는 시점과 js의 실행</title>
+    <script defer src="./l04document_load.js"></script>
+    <style>
+        #title{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">html 이 로딩되는 시점과 js의 실행</h1>
+    <p>문서의 생명주기와 js로 문서가 생성되는 시점을 제어하자!</p>
+    <h2>script 를 body의 가장 하단에 작성하는 이유</h2>
+    <p>html의 노드 객체가 모두 생성되는 시점에 스크립트(script 요소)를 생성 및 실행하기 위해</p>
+    <ul>
+        <li>브라우저는 html 에 작성된 요소를 dom tree로 분석후 순서대로 객체로 만들어서 화면에 렌더링합니다.</li>
+        <li>이때 script 태그도 요소에 포함되며 브라우저는 sciprt 요소를 렌더링하는 대신 js 엔진이 실행합니다.</li>
+        <li>js 엔진이 script 태그를 실행할때 해당 요소에서 찾는 노드 객체(tag)가 생성되어 있지 않다면 undefined가 된다.</li>
+        <li>body 태그는 html에서 오직 1개만 존재하는 요소로 노드 개체를 자식으로 모두 포함하면 만약 실수로 작성하지 않거나
+            2개이상 작성하면 브라우저가 자동으로 1개로 통합시킨다.(무조건 1개 존재한다!)
+        </li>
+        <li>body의 자식의 가장하단에 script 태그를 작성하면 무조건 제일 마지막에 생성되는 노드 개체가 된다!(무조건 마지막에 실행!)</li>
+    </ul>
+    <h2>window.onload와 document 의 DOMContentLoaded</h2>
+    <ul>
+        <li>window.onload : 이미지 리소스를 포함한 html 이 모두 렌더링이 되는 시점에 발생하는 이벤트 함수</li>
+        <li>document.addEventListener('DOMContentLoaded',()=>{}) : 노드 개체가 모두 생성되는 시점에 발생하는 이벤트함수    
+        </li>
+        <li>on이벤트=(e)=>{} : 이벤트를 재정의하는 방법으로 마지막에 재정의한 함수 1개만 동작</li>
+        <li>node.addEventListener('이벤트',(e)=>{}) : 이벤트 함수의 여러 콜백함수를 더하듯 재정의 하는 함수</li>
+    </ul>
+    <h2>script 리소스를 다운받는 시점을 정의하는 defer async</h2>
+    <ul>
+        <li>외부 js를 리소스를 참조하여 다운받을 때 scipt 요소 작성과 똑같이 body의 자식 맨하단 작성하는 방법이 존재한다. </li>
+        <li>defer : document 객체가 모두 생성되면 js 리소스를 다운받는 속성 *********</li>
+        <li>async : document 객체를 생성하면서 동시에 js 리소스를 다운받는 속성</li>
+    </ul>
+</body>
+</html>

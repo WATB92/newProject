@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프라미스화</title>
+</head>
+<body>
+    <h1>프라미스화로 코드를 리팩터링하자(재사용)</h1>
+    <h2>XMLHttpRequest 로 비동기식 통신하는 함수를 프라미스화 해서 코드를 간단하게 줄여봅시다.</h2>
+    <div id="proCont"></div>
+    <div id="basCont"></div>
+
+    <script>
+    //함수를 리팩터링 하는 과정
+    function loadUrl(url,callBackFuc,method="GET"){
+        return new Promise((resolve)=>{
+
+            
+            const req=new XMLHttpRequest();
+            req.open(method,url)
+            req.send();
+            //req.onload=callBackFuc;
+            req.onload=(event)=>{
+                callBackFuc(event);
+                resolve("콜백함수 실행완료!")
+            }
+            //재정의하는 콜백함수에 매개변수를 여러개 전달하는 방법
+            //함수를 정의 해놓고 그 내부에서 실행을 정의      
+        });
+            
+    }
+    loadUrl("../homework/l19baskets.json",(e)=>{
+        basCont.innerText=e.target.responseText;
+    });
+    loadUrl("../homework/l18products.json",(e)=>{
+        proCont.innerText=e.target.responseText;
+    });
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수의 this binding에 대해 알아 봅시다.</title>
+</head>
+<body>
+    <h1>함수의 this binding에 대해 알아 봅시다.</h1>
+    <p></p>
+
+    <h2>this binding의 예시</h2>
+    <ul>
+        <li><button id="btn1">this binding</button></li>
+        <li><button id="btn2">this binding 실패</button></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        //모든 태그는 랭더링 되면서 객체로 저장된다.
+        //이때 id로 변수명이 등록 된다.
+        console.log(btn1);
+        //버튼 객체에 있는 필드 onclick을 함수로 재정의
+        //마우스를 누를 때 마다 호출 되는 콜백함수가 된다.
+        btn1.onclick=function(){
+            console.log("btn1 눌림!!");
+            console.log(this);//btn1 : this가 객체를 바인딩 했다.
+            this.style.backgroundColor="red";
+            
+        }
+        
+        const btn2EventHandler=function(){ //프로토 타입이 없는 함수, this가 없다.
+            console.log("btn2 눌림!!");
+            console.log(this);
+            
+            this.style.backgroundColor="blue" 
+            //this=window => binding 하지 못했다.btn2 객체에 함수가 this를 참조하지 못하고 바로
+            //위에(포함하는) 있는 객체를 참조
+        }
+        const btn1EventHandler=btn2EventHandler.bind(btn1); // this를 btn1로 하겠다.
+        //바인딩함녀 새로운 함수를 변환
+        //btn1EventHandler();//onclick 안해도 실행 this를 binding하지 않고 샐행
+        
+        btn2.onclick=btn2EventHandler;
+
+
+
+
+        class User{
+            constructor(id,n){
+                this.id=id;
+                this.n=n;
+                this.hello2=()=>{
+                    console.log(this.id+"야 안녕!!!");
+                    
+                }
+            }
+            hello=function(){
+                console.log(this.n+"아 안녕");
+                
+            }
+            sayHello=()=>{
+                console.log(this.n+"안녕!");
+                //클래스 내부에서 작성하면 this를 클래스로 생성하는 객체의 필드로 바인딩해준다.
+                
+            }
+        }
+        const user=new User("devl","자바스크립트");
+        user.hello();
+        user.hello2();
+        user.sayHello();
+        user.hello=()=>{
+            console.log(this.n+"잘가!!");
+            //this가 user 개체를 참조하지 못한다.
+            
+        }
+        user.hello();
+        console.log(user);
+        
+
+        //타입으로 지정된 함수에서 this가 binding 되었나?
+        //binding됨 : 객체를 this로 참조
+        //binding안됨 : 해당 객체를 뛰어넘고 그 부모 객체를 참조
+        function Member(id,n){
+            this.id=id;
+            this.n=n;
+            this.hello=function(){
+                console.log(this.n+"야 안녕~");
+                
+            }
+            this.hello2=()=>{
+                console.log(this.n+"야 안녕!~~");
+                
+            }
+        }
+        console.log("#########################");
+        
+        const mem=new Member("wtb","자바")
+        mem.hello();
+        mem.hello2();
+
+        mem.hello=function(){
+            console.log(this.id+"야 안녕");
+            //"wtb야 안녕"
+        }.bind(user);
+        //익명 함수에 user를 this로 하는 새로운 함수를 만들어서 hello에 참조 시키겠다.
+
+        mem.hello2=()=>{
+            console.log(this.id+"야 안녕");
+            //"undefined야 안녕"
+        }//.bind(mem); //bind() Object.prototype 함수기 때문에 프로토 타입이 없는 화살표
+            //함수는 사용할 수 없다. (function만 가능)
+        mem.hello(); //
+        mem.hello2();
+
+
+        btn1.onclick=function(){
+            console.log(this); // this = btn1
+            this.style.backgroundColor="blue";
+            
+        }
+        btn2.onclick=()=>{
+            console.log(this); // this = window
+            this.style.backgroundColor="red";
+            //window.style == undefined
+            //undefined.backgroundColor => 오류
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바 스크립트의 데이터</title>
+</head>
+<body>
+    <h1 id="title">자바 스크립트의 데이터</h1>
+    <script>
+        //문자열 : 문자로된 열 "안녕하세요~" => 
+        //안,녕,하,세,요,~ : 문자로 된 집합 인데 순서(index)가 존재(열)
+        document.write("<h2><i>자바 스크립트로 출력<i/><h2/>")
+        //문자 열을 개체로 만들어 출력    
+
+        //document(문서), console(콘솔), title(요소)... : 객체
+        //write(""), log(""), window.alert("") : 함수(무엇 인가를 실행, 실행의 집합)
+        //document"."write : "." 필드 접근자
+        //사람 (document)이 글(write())을 쓴다 .사람.손, 사람.인사(), 사람.발 
+        //수 (값) : 연산 가능한 것
+        //NaN(Not a Number) : 수가 아닌 것은 연산이 불가능 합니다. 상태를 나타내는 data
+
+
+        document.write(11*45) //495 => "495" 변환해서 출력
+        //출력, 입력은 문자열만 가능하다.
+        //연산 : +,-,/,*,%, ++(증가), --(감소) 증감연산
+        document.write(11*45) 
+
+        //문자열은 더하기 연산이 가능하다.
+
+        document.write("<p>11*45="+(11*45)+"</p>")
+        document.write("안녕"*10)//문자열은 더하기만 가능
+        document.write("<br>")
+        document.write(document.body) // 문서의 본문 객체
+        //object(객체) HTMLBodyElement(타입)
+        //사람(강사, 학생, 매니저 여러 타입)
+        document.write("<br>")
+
+        document.write(window.title) //id 지정하면 최상위에 소속
+        //object HTMLHeadingElement
+        document.write("<br>")
+        document.write(window) // 브라우저 전체 객체
+        document.write("<br>")
+        document.write(window.console) // 개발자 도구 객체
+        document.write("<br>")
+        document.write(window.document)
+        //브라우저가 렌더링 중인 html 문서 객체
+    </script>
+</body>
+</html>

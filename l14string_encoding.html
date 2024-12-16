@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- utf-8 encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열 인코딩</title>
+</head>
+<body>
+    <h1>문자열 인코딩에 대해 알아 봅시다.</h1>
+    <h2>인코딩 : 문자를 특정 문자표에 맞게 번호로 변경</h2>
+    <h2>디코딩 : 수를 문자표의 문자로 변경 </h2>
+
+    <script>
+        let byteArr= new TextEncoder().encode("ABC");//"A","B","C" 문자열 문자열표 번호
+        console.log(byteArr); //[65,66,67] // 아스키코드표 1byte 0~255
+        byteArr=new TextEncoder().encode("뷁쉥쉑");
+        console.log(byteArr); 
+        //[235, 183, 129,=뷁 236, 137, 165,=쉥 236, 137, 145=쉑] == "가" (한글은 3byte)
+        //euc-kr(ms949)[197,123, 184, 26, 177, 188]
+
+
+        let unicodeStr=new TextDecoder().decode(byteArr); // vsCode 정상으로 동작
+        console.log(unicodeStr);
+
+        let euckrStr=new TextDecoder("euc-kr").decode(byteArr) // 메모장 앱에서는 깨짐
+        console.log(euckrStr);
+
+        
+        
+        
+
+        //인코딩 == 문자표 UTF-8
+        //UTF-8 : 유동성 문자표 (문자마다 크기가 다르다)
+        //면접 단골 질문 :유니코드 (utf-8) 프로그래밍 언어 js,java 문자의 크기는 2byte x
+        //아스키 코드표 :사용화된 컴퓨터의 최초 문자표 (모든 문자표가 동일한 번호를 갖는다) => 
+        //운영체제에서 아스키 코드표만 참조하는 경우가 많기 때문에 파일 이름이나 풀더 명을 꼭 영어로 해야한다.
+        //window (ms949 == euc-kr), mac(utf-8)
+        
+        
+    </script>
+</body>
+</html>

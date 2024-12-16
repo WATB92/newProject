@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클래스와 생성자</title>
+</head>
+<body>
+    <h1>클래스와 생성자와 Object</h1>
+    <ul>
+        <li>클래스 내부에 생성자는 오직 1개만 정의할 수 있다.</li>
+        <li>Object 타입이 모든 자료형이 기본 형태가 된다.
+            <ul>
+                <li>let obj=new Object() -> { } 필드가 없는 빈 자료형 </li>
+                <li>obj.name="경민"-> {name:"경민"}</li>
+                <li>let obj={"name":"경민"};</li>
+            </ul>
+        </li>
+        <li>생성자는 객체를 생성할때 무조건 호출 된다.</li>
+        <li>생성자를 객체를 초기화(초기값을 지정) 할 때 사용 한다 </li>
+        <li>생성자는 꼭 new 연산자로 호출해서 객체를 만든다. 
+            랩퍼 클래스와 유틸 클래스 (Date)를 제외하고</li>
+    <h2>프로토타입</h2>    
+     <ul>
+    <!-- 아래부턴 프로토 타입 -->
+        <li>자바 스크립트는 객체의 프로토타입을 미리 만들어 놓고 
+            사용하는 프로토 타입 언어다</li>
+        <li>프로토 타입 : 객체와 타입의 중간 단계로 형태를 갖추곤 있지만 동작되지 않는 것</li>
+        <li>객체를 만들기 위해서 new 연산자로 생성자를 호출하면 타입으로 객체를 만드는 것
+            이 아니라 타입으로 미리 만든 프로토 타입으로 객체를 생성한다.
+            (객체와 타입의 중간 단계가 있다.)
+        </li>
+        <li>우리가 클래스를 명시하면 js 엔진이 해당 클래스로 프로토 타입으로 만들면서
+            무조건 Object의 prototype을 상속한다. (상속 : Object의 모든 기능을 다 
+            사용하는 것)
+        </li>
+    </ul>
+    </ul>
+    <h2>클래스와 상속</h2>
+    <ul>
+        <li>모든 클래스 Object 클래스를 상속 받는다.</li>
+        <li>다른 클래스를 상속하면 상속(extends) 받은 클래스의 모든 필드를 물려 받는다.</li>
+        <li>상속을 하는 이유 : 타입을 재사용 하기 위해서</li>
+        <li>부모 필드 접근자 super , 부모의 생성자 super()</li>
+        <li>자식의 객체를 만들때 생성자를 호출하면 부모의 생성자도 호출 되기 때문에
+            자식의 생성자를 정의할때 부모의 생성자를 꼭 호출해야한다.
+
+        </li>
+    </ul>
+    <script>
+        class Test{}
+        console.log(String ("안녕"),Number(44),Boolean(1==1),Date());
+        //console.log(Test());
+        
+        
+        
+
+
+
+
+        class Member{
+            constructor(id){
+                this.id=id;
+            }
+            //constructor(){} 동일한 생성자를 2개 쓸 수 없다.
+            //constructor(name){} : 자바 스크립트는 오버로딩이 불가능
+            hello(name){ // class 안에서 function을 생략
+                console.log(name+"안녕하세요");
+                
+            }
+            //상속 받은 부모의 toString과 동일한 이름을 작성해서 우선 순위를 보모보다 높인다.
+            //Overriding(Override) : 재정의 한다.
+            toString(){ // 객체에 대한 문자열 정보를 재정의하라고 만들어 놓은 함수
+                //[object object]
+                //super : Member가 상속한 Object의 필드 접근자
+                //this : Member 필드 접근자
+                return super.toString()+"나는 id가 "+this.id+"인 객체야";//객체의 정보
+            }
+        }// 설계도 : class 평면적인 청사진 
+        console.log(Member);//문자열만 출력
+        //js 엔진이 객체로 만들기 편하도록 프로토 타입(형태만 미리 만들어 놓은것)을 생성
+        console.log(Member.prototype);
+
+        console.log(new Member().__proto__);
+        console.log(new Member().__proto__.__proto__);
+        
+        //__proto__ 부모 or 객체 입장에서 나를 만든 프로토 타입
+
+
+        let m=new Member("재덕");
+        m.hello("상혁씨")
+        console.log(m.toString()); //Object.toString() : 상속 받은 필드를 사용할 수 있다.
+        console.log(m);
+        
+        console.log(m.valueOf());//JSON 출력한다.
+        
+
+        let obj={}; // 지정한 타입이 없는(Object) 빈 객체를 리터럴하게 생성
+        let obj2=new Object();
+        console.log(obj, obj2);
+            //일반 적인 상속 
+
+            class A{
+                constructor(){
+                    this.a=10;
+                }
+
+            }
+            //
+            class B extends A{ //B가 A를 상속받는다.
+                constructor(){
+                    super(); 
+                    // 부모가 생성자를 정의하면 자식이 생성자를 정의할때 부모 생성자를 호출해야한다.(규칙)
+                    this.b=20;
+                }
+
+            }
+            class C extends B{
+                constructor(){
+                    super();
+                    this.c=30;
+                }
+            }
+            console.log(new A());// {a:10}
+            console.log(new B());//{a:10 b:20}
+            console.log(new C());//{ a:10 b:20 c:30}
+            
+            //Object > A > B > C
+            
+            
+
+
+
+
+    </script>
+</body>
+</html>

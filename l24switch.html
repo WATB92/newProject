@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건문 switch</title>
+</head>
+<body>
+    <h1>깔끔한 제어문 조건문 switch</h1>
+    <p>case와 key로 동등비교연산을 사용하는 약속된 구문</p>
+    <ul>
+        <li>switch는 if보다 가독성이 높다.</li>
+        <li>가독성이 높은 코드는 유지보수되기 좋다.</li>
+        <li>if문보다 연산속도가 월등히 빠르다.(폭포처럼 동작)</li>
+        <li>단점 : 조건에 제약이 있다.(크기비교나 다양한 조건을 같이 사용할 수 없다.)</li>
+        <li>특징 : key로 기본데이터를 사용한다.(자료형은 사용되지 않음)</li>
+        <li>=== : 완전동등연산으로 값을 비교할 수 있는 데이터는 기본형밖에 없다.
+            (자료형의 경우 나 자신의 비교할때만 true) 
+            let a=[1,2] a===a :true, a===[1,2] : false</li>
+    </ul>
+    
+    <script>
+        let str =new String("잘가!");
+
+        if(str==="안녕"){
+            console.log("if 로 인사");
+        }else if(str=="잘가!"){
+            console.log("if 로 헤어짐 인사");
+        }else{
+             console.log("if 로 어떤 인사도 아님");
+        }
+        //switch의 규칙
+        switch(str){ //key는 꼭 기본형을 참조해야합니다.(Number,String,Boolean)
+            case "잘가!":console.log("switch로 헤어짐 인사"); break;
+            case "안녕" : console.log("switch로 인사"); break;
+            //case == (===)
+            default : console.log("key가 자료형이거나 어떤 인사도 아님");
+        }
+
+
+    </script>
+
+
+</body>
+</html>

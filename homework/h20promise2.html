@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise 실습</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>promise 실습</h1>
+    <h2>장바구니를 먼저 출력하고 상품을 출력하세요(Promise)</h2>
+    <table id="cartTable">
+        <thead>
+            <tr>
+                <th>num</th>
+                <th>title</th>
+                <th>price</th>
+                <th>cnt</th>
+                <th>total</th>
+                <th>img</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // 장바구니 데이터
+        const cart = [
+            { num: 1, title: "사과", price: 1000, cnt: 2, img: "apple.jpg" },
+            { num: 2, title: "바나나", price: 2000, cnt: 3, img: "banana.jpg" }
+        ];
+
+        // 상품 데이터
+        const products = [
+            { id: 1, name: "오렌지", price: 1500, img: "orange.jpg" },
+            { id: 2, name: "포도", price: 3000, img: "grape.jpg" }
+        ];
+
+        // 장바구니 출력 함수
+        function displayCart() {
+            return new Promise((resolve, reject) => {
+                try {
+                    const tbody = document.querySelector('#cartTable tbody');
+                    cart.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.num}</td>
+                            <td>${item.title}</td>
+                            <td>${item.price}</td>
+                            <td>${item.cnt}</td>
+                            <td>${item.price * item.cnt}</td>
+                            <td><img src="${item.img}" width="50"></td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                    resolve('장바구니 출력 완료');
+                } catch (error) {
+                    reject('장바구니 출력 실패: ' + error);
+                }
+            });
+        }
+
+        // 상품 출력 함수
+        function displayProducts() {
+            return new Promise((resolve, reject) => {
+                try {
+                    const productSection = document.createElement('section');
+                    productSection.innerHTML = '<h2>상품 목록</h2>';
+                    products.forEach(product => {
+                        productSection.innerHTML += `
+                            <div>
+                                <h3>${product.name}</h3>
+                                <p>가격: ${product.price}원</p>
+                                <img src="${product.img}" width="100">
+                            </div>
+                        `;
+                    });
+                    document.body.appendChild(productSection);
+                    resolve('상품 출력 완료');
+                } catch (error) {
+                    reject('상품 출력 실패: ' + error);
+                }
+            });
+        }
+
+        // Promise 체이닝으로 순차적 실행
+        displayCart()
+            .then(result => {
+                console.log(result);
+                return displayProducts();
+            })
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+</html>   

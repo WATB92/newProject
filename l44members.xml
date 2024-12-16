@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<members>
+    <member>
+        <id>develckm</id>
+        <name>경민</name>
+        <age>38</age>
+        <married>true</married>
+    </member>
+    <member>
+        <id>잡기</id>
+        <name>두더지</name>
+        <age>20</age>
+        <married>true</married>
+    </member>
+</members>

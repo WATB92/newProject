@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array의 유용한 method</title>
+</head>
+<body>
+    <h1>Array의 유용한 method</h1>
+    <p>Array는 자주 사용되는 자료기 때문에 유용한 함수를 제공하고 있다.</p>
+    <h2>요소를 추가하는 메서드</h2>
+    <ul>
+        <li>push(data) : 배열의 맨끝 요소 추가</li>
+        <li>unshift(data) : 배열의 맨 앞 요소 추가 (모든 요소들 뒤로 이동)</li>
+        <li>pop() : 배열의 맨 끝 요소 제거</li>
+        <li>shift () : 배열의 맨 앞 요소 제거 (모든 요소를 앞으로 이동)</li>
+
+    </ul>
+    <h2>splice는 배열에서 특정 요소를 삭제하고 배열로 반환하는 메서드</h2>
+    <ul>
+        <li>arr.splice(startIndex) : 배열의 시작점 부터 끝까지 삭제하고 배열을 반환</li>
+        <li>arr.splice(start,count) : 배열의 시작점 부터 count까지 삭제하고 배열을 반환</li>
+        <li>arr.splice(start,count,...args) : 배열의 시작점 부터 count까지 삭제하고
+            배열을 반환 후 args 매개변수를 시작점부터 추가</li>
+        <li>startIndex의 음수 : 끝점부터 시점</li>
+    
+    </ul>
+    <h2>concat 배열의 + 연산 (지원하는 프로그램 언어가 많지 않다.)</h2>
+    <ul>
+        <li>new Array(),concat([...],[...]) : 앞쪽 배열을 기준으로 그 다음 배열을 더하는 연산 </li>
+        <li>[....].concat([...],...) : 앞쪽 배열을 기준으로 그 다음 배열을 더하는 연산</li>
+        <li>"안녕".concat("!") == "안녕"+"!" : 두 문자열을 더해서 새로운 문자열은 만드는 연산</li>
+        <li>기본형은 불변 데이터기 때문에 기존의 데이터를 변경하지 않는다.</li>
+        <li>Array 자료형은 길이가 변경 가능한 배열자료 (시퀀스)다.</li>
+    </ul>
+    <h2>배열의 상태를 문자열로 출력하는 toString(), join("구분자")</h2>
+    <ul>
+        <li>toString(): 배열 내부의 아이템을 구분자","로 결합해서 문자열로 반환</li>
+        <li>join("구분자") : toString()과 같은데 구분자를 변경 가능</li>
+    </ul>
+    <h2>특정 인덱스의 아이템을 참조하는 at()</h2>
+    <p>at()은 []과 같이 index의 아이템을 참조하는 -1로 끝쪽 아이템을 참조할 수 있다.</p>
+
+
+    <script>
+        let a=["a","b"];
+        let b=["c","d"];
+        let c=a.toString()+b.toString(); // a,bc,d
+        //Object.toString() : 해당 객체에 대한 설명 
+        c=a+b;
+        console.log(c);
+        console.log(a.concat(b));
+        console.log(new Array().concat(a,b,["e","f"]));
+        
+        //랩퍼 클래스:Number,Boolean,String (객체 생성 없이 사용가능)
+
+        console.log("ab"+"cd");
+        console.log(new String().concat("ab","cd","ef"));
+        //문자열의 + 연산은 concat()함수와 같다.
+        //하지만 문자열은 기본형 데이터로 불변(immutable) 이기 때문에 
+        //매번 새로운 문자열을 생성한다.
+        console.log(Number(100).toString(2));
+        console.log(new Number(100).toString(2));
+
+        
+        //스프레드 (... 펴 바른다.) 연산 {es6 신문법}
+
+        let x=["X", "Y","Z"]
+        let z=["a","b",...x,"d","e"]
+        console.log(x);
+        console.log(z);
+        console.log([...a,...b]);
+
+        
+        //toString () 을 구분자로 만드는 join("구분자")
+        console.log(z.toString());//"a,b,X,Y,Z,d,e"
+        console.log(z.join("-")); //"a-b-X-Y-Z-d-e"
+        
+        //slice(startIndex, endIndex)
+        console.log(z.slice(2,4)); //배열의 변경없이 특정 인덱스의 아이템을 추출
+        console.log(z);
+        
+        console.log(z[3],z.at(3));
+        console.log(z[-1],z.at(-1)); //[]==at()  음수 index 가능
+        
+        
+        
+
+        
+
+        "a,b,c,d,e 순서대로 있는 배열 자료를 정의하세요"
+        let arr=['a','b','c','d','e']; // 리터럴한 방식
+
+        
+        
+        arr=new Array();
+        arr.push("a");
+        arr.push("b");
+        arr.push("c");
+        arr.push("d");
+        arr.push("e");
+
+        arr.unshift("Z")
+        console.log(arr);
+
+        console.log(arr.splice(3,2,"C","추가1","추가2",["추가3","추가4"])); 
+        //splice(start,count, items....) //...다수의 매개변수가 가능
+        console.log(arr);
+        
+        //splice : 음수 인덱스
+        console.log(arr[-1]); // ?
+        console.log(arr.splice(-2,2)); // d,e 삭제
+        
+        
+        
+
+    </script>
+</body>
+</html>

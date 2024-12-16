@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 주성 : 실행되지 않는 코드 -->
+     <!-- head : 문서정보, mata : 메타정보(상세정보) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안녕 자바스크립트</title>
+    <style>
+        h1{
+            text-decoration: underline;
+        }
+
+    </style>
+    <script>
+        // : 자바 스크립트 주석
+        //alert("자바 스크립트 경고창")
+        //자바 스크립트가 할 수 있는 일 : 출력된 요소를 변경하기
+        title.onclick=function(){
+            title.style.color="red"
+        }
+    </script>
+</head>
+<body>
+    <h1 id="title">안녕~ 자바 스크립트야~!</h1>    
+    <p>html과 css는 같이 랜더링 되어서 화면에 출력된다.</p>
+    <p>html,css 는 블럭 순서대로 렌더링 하는데 
+        js는 hmtl이 렌더링 된 후에 동작한다</p>
+    <p>출력된 요소를 개체 또는 객체라 부른다.</p>    
+    <script>
+        //id: 개체를 찾는 유일한 선택자
+        console.log(title)
+        title.onclick=function(){
+            title.style.color="red"
+        }
+
+    </script>
+</body>
+</html>

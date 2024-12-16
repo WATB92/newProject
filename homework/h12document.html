@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document 실습</title>
+</head>
+<body>
+    <h1>Document 실습</h1>
+    <h2>sumUl>li의 모든 수를 더하세요.</h2>
+    <ul id="somUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+    </ul>
+    <h2>multUl>li의 모든 수를 곱하세요.</h2>
+    <ul id="multUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <h2>filterUl>li의 수인 배열만 만드세요 [li{1},li{2},li{3},li{4},li{5}]</h2>
+    <ul id="filterUl">
+        <li>1</li>
+        <li>2</li>
+        <li>칠</li>
+        <li>3</li>
+        <li>4</li>
+        <li>팔</li>
+        <li>5</li>
+    </ul>
+    <h3>위의 배열에서 [1,2,3,4,5]로만 된 배열을 만드세요 map</h3>
+    <script>
+        // //for of로 li 내의 모든 수를 더하세요.
+        // const sumUl=document.getElementById("sumUl");
+        // const sumLis=sumUl.getElementsByTagName("li");//태그 내에서 탐색이 가능
+        // let result=0
+        // for(let li of sumLis){
+        //     let num=Number(li.innerText);
+        //     result+=num;
+        // }
+        // console.log(result);
+///////////////////////////////////////////////////////////////////////////////////////////
+        //Array의 reduce나 forEach 이용
+        //HTMLCollection => Array의 forEach나 Reduce를 사용할 수 없다.
+        //시퀀스가 존재하는 자료구조를 Array 타입으로 변경 Array.from()
+        // let sumULLis=document.getElementById("sumUl").getElementsByTagName("li");
+        // console.log(sumULLis);
+        // sumULLis=Array.from(sumULLis);
+        // console.log(sumULLis);
+        
+        // let sum=sumULLis.reduce((result,item)=>{
+        //     //item ==li객체
+        //     let num=Number(item.innerText);
+        //     return result+num;
+        // },0)
+        // console.log(sum);
+        
+        
+        const somUl=document.getElementById("somUl");
+        const somLis=somUl.getElementsByTagName("li");
+        let result=0
+        for(let li of somLis){
+            let num=Number(li.innerText);
+            result+=num;
+        }
+        console.log(result);
+
+        // const somUl=document.getElementById("somUl");
+        // const somLis=somUl.getElementsByTagName("li");
+        // console.log(sumUlis);
+        // const sumUliArr=Array.from(sumUlis); // HTMLColletion => Array
+        // //reduce((li[0],li[n])=>{},)
+        // //reduce((li[0],li[n])=>{},0)
+        // let sum=sumUliArr.reduce((init,li)=>Number{li.innerText}+init,0)
+        // console.log(sum);
+        
+        
+        
+
+
+
+        const multUl=document.getElementById("multUl");
+        const multLis=multUl.getElementsByTagName("li")
+        let init=1
+        for(let li of multLis){
+            let num=Number(li.innerText);
+             init*=num
+        }
+        console.log(init);
+        
+
+
+
+        const filterUl=document.getElementById("filterUl");
+        const filterUlLis=Array.from(filterUl.getElementsByTagName("li"));
+        //HTTMCollection 자료가 잘 사용되지 않으니 바로 Array로 변경 후 사용
+        console.log(filterUlLis);
+        let numLis=filterUlLis.filter((li)=>!isNaN(li.innerText));
+        console.log(numLis);
+        nums=numLis.map((li)=>Number(li.innerText));
+        console.log(nums);
+        
+        
+
+
+        
+        
+    </script>
+</body>
+</html>

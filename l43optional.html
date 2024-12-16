@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유용한 연산한 옵셔널 체이닝</title>
+</head>
+<body>
+    <h1>유용한 연산한 옵셔널 체이닝</h1>
+    <h2>자바스크립트와 오류</h2>
+    <ul>
+        <li>자바스크립트는 스레드가 1개인 순차적 언어로 브라우저가 html 문서를 노드개체로
+            만들면서 script 태그를 발견하면 자바스크립트 엔진이 내부 코드를 순서대로 실행한다.
+        </li>
+        <li>그런데 순차적으로 실행 중 오류가 발생하면 자바스크립트 엔진이 실행을 멈춘다.</li>
+        <li>오류가 발생한 지점의 하위 코드는 실행되지 않는다.(때문에 예외처리를 해야함)</li>
+    </ul>
+    <h2> . 하위 필드 접근자와 오류</h2>
+    <ul>
+        <li>모든 자료형인 Object는 하위 필드가 존재하고 '.'으로 필드를 접근 할 수 있다.</li>
+        <li>만약 object에 존재하지 않는 필드를 접근하면 undefined를 반환한다. </li>
+        <li>undefined와 null은 필드가 존재하지 않기 때문에 '.'을 사용할 수 없다. 만약
+            사용하면 오류가 발생한다.
+        </li>
+        <li>undefined 참조 오류를 만기 위해 항상 예외 처리를 해야한다.</li>
+    </ul>
+    <h2>undefined 참조 오류를 막기 위한 예외처리</h2>
+    <ul>
+        <li>if(obj.a){obj.a.b} : 0 or "" or false 데이터를 제외</li>
+        <li>if(obj.a===undefined || obj ===null){ c=obj.a.b}</li>
+        <li>c = obj.a && obj.a.b : 0 or "" or false 데이터를 제외</li>
+        <li>c = obj?.a?.b; : ? (옵셔널:null인지 물어보는것) chainging(a.b.c...)</li>
+    </ul>
+
+    <script>
+        // . : 하위 필드 접근자 (자료형에만 사용가능)
+        let a=10;
+        //문제 : a는 필드가 존재하나요?
+        console.log(a.toString()); // Number,Boolean,String,Symbol 
+        console.log(Number(a).toString());
+        console.log(a.length); // undefined
+        console.log(a.str.length); 
+        // undefined.length : 필드를 참조하려하면 오류가 발생한다. 
+        
+        console.log("안녕~~ 오류가 무서워~"); // 오류가 발생하면 엔진이 실행을 멈춘다.
+
+        const obj={name:"경민", family:[{name:"경현"},{name:"제영"}]}
+        console.log(obj.family[1].name); //obj 가족중에 1번째 가족의 이름
+        //console.log(obj.family[2].name);
+        if(obj.family[2]){ //undefined 참조 오류를 사전에 예방
+            console.log(obj.family[2].name);
+        }//"",0,false 데이터를 제외한다.
+
+        obj.family[2] && console.log(obj.family[2].name);
+        //&& 모두가 true가 나와야 하기 때문에 앞에가 true가 나와도 모두가 true가 될때까지 검사
+        //앞이 존재 할때 뒤에 것을 실행
+
+        let name= obj.family[0] && obj.family[0].name;
+        console.log(name);
+        
+        //코드가 길고 가독성이 떨어져서 옵셔널 체이닝을 만들었다.
+
+        console.log(obj?.family[2]?.name);
+        //하위필드 접근 전에 null이거나 undefined이면 접근하지 않는다.
+        //없으면 undefined
+
+        console.log(obj?.family[1]?.name);
+        
+    </script>
+</body>
+</html>

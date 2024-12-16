@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form 요소와 input 요소 연습</title>
+</head>
+<body>
+    <h1>form 요소와 input 요소 연습</h1>
+    <ul>
+        <li>문제1. user와 id의 글자수가 맞을때만 form.submit을 하세요.</li>
+        <li>문제2. 개발언어(language) 체크박스를 만드세요.(js,java,pyton,jsp,spring,react)</li>
+        <li>문제3. 남(male)자 여자(female) 라디오 버튼을 만드세요.(gender)</li>
+        <li>문제4. 1,2,3,4 모두 작성되면 form.sumbmit을 하세요.</li>
+    </ul>
+    <form name="signupForm" action="signup.do">
+        <p>
+            <label>이름 :
+                <input type="text" name="user" value="" placeholder="이름은 2글자 이상">
+            </label>
+        </p>
+        <p>
+            <label>아이디 :
+                <input type="text" name="id" value="" placeholder="아이디는 4글자 이상">
+            </label>
+        </p>
+        <p>
+            <!-- <input type="submit" value="제출버튼"> -->
+             <button name="resetBtn" type="reset">초기화</button>
+            <button type="submit">제출</button>
+        </p>
+        <h5>언어</h5>
+        <p id="language"></p>
+        <label>
+        js :<input type="checkbox" name="lang" value="js">
+
+        </label>
+        <label>
+        java :<input type="checkbox" name="lang" value="java">
+    
+        </label>
+        <label>
+        pyton :<input type="checkbox" name="lang" value="pyton">
+        
+        </label>
+        <label>
+        jsp :<input type="checkbox" name="lang" value="jsp" >
+        </label>
+        <label>
+        spring :<input type="checkbox" name="lang" value="spring" >
+        </label>
+        <label>
+        react:<input type="checkbox" name="lang" value="react" >
+        </label>
+
+        <h5>성별</h5>
+        <label>
+            여성 :<input type="radio" name="gender" value="female" >       
+        </label>
+        <label>
+            남성 :<input type="radio" name="gender" value="male" >       
+        </label>
+        <input name="submitBtn" type="submit" value="서브밋버튼">
+    </form>
+    <script>
+        const signupForm=document.forms.signupForm;
+        // signupForm.resetBtn.onreset=function(e){
+        //     console.log("버튼에서 리셋이 동작합니다! 1");
+            
+        // }
+        // //form input의 초기값을 기억하고 있다가 reset을 실행
+        // const signupFormReset=function(e){
+        //     e.preventDefault();//현재 이벤트 동작을 막는다.
+        //     //console.log("폼에서 리셋이 동작합니다! 2");
+        //     //this.reset();
+        // }
+        // signupForm.addEventListener("reset",signupFormReset);
+        // //하나에 이벤트에 여러개의 콜백함수를 재정의할 수 있다.
+
+
+        //제출 버튼을 누르면 submit 이벤트가 발생하는데 제출을 막으세요!
+        
+        function checked(checks){
+            let checkVals=[]; 
+            for(let checkBox of checks){
+                if(checkBox.checked){
+                    checkVals.push(checkBox.value);
+                }
+            }
+            return checkVals;}
+
+
+        signupForm.onsubmit=()=>{let checkuserval=signupForm.user.value
+            let checkuser=signupForm.id.value
+            let checklang=checked(signupForm.lang)
+            let checkgen=checked(signupForm.gender)
+            if(checkuserval.length<2){
+                return false}
+            if(checkuser.length<4){
+                return false
+            }
+            if(checklang==""){
+                return false
+            }
+            if(checkgen==""){
+                return false
+            }
+
+            else{return true}
+
+
+        
+
+
+        
+            
+            //console.log(event.submitter); //SubmitEvent
+            //console.log(event.srcElement, event.target);
+            //event.target == 모든 이벤트에서 사용가능(이벤트가 발생한 대상)
+            console.log(event.target.user.value, event.target.id.value);
+
+            //signupForm.submit()//위에서 예외 처리하고 다시 form sebmit 실행 
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

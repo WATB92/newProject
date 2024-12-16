@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>익명함수</title>
+</head>
+<body>
+    <h1>익명함수에 대해 알아봅시다.</h1>
+    <p>프로그램에서 먼저 사용되지 않을 함수가 엄청(10000개) 많을 떄 익명 함수 표기법을
+        사용해서  그 함수를 사용할 때만 함수를 메모리에 저장하는 방법이다.</p>
+    <ul>
+        <li>function name (){} : 함수 선언식 (메모리에 먼저 저장됨)</li>
+        <li>setInerval(name,1000) : 미리 선언한 함수를 1초마다 호출</li>
+        <li>**setInerval(function(){},1000) : 익명 함수를 매개 변수로 사용한 예)
+            1초마다 익명함수가 호출되기 때문에 콜백함수 (call back function)라 한다.</li>
+        <li>function(){} : 익명 함수 (이름 없는 함수, 매개 변수로 바로 정의 후 대입)</li>
+
+        <!-- 
+        let obj=new Objcet();
+        console.log() -->
+
+        <li>const name = function(){} : 익명함수 표기법(함수 선언식)</li>
+        <li>익명 함수 표기법을 사용하면 함수의 호이스팅을 막을 수 있기 때문이다.</li>
+        <li>함수 호이스팅 : 아래에 정의한 함수가 위에서 호출 가능한 상태
+            (자바스크립트 엔진이 함수를 먼저 찾아서 메모리에 저장하기 때문 : 익명함수는 제외)</li>
+    </ul>
+    <h5 id="clock"></h5>
+    <h5 id="digitalClock"></h5>
+    <!-- id=digitalClock h5로 만들어서 현재 날짜와 시간을 1초마다 출력하세요.
+     setInerval(function(){},1000) 매개 변수를 익명함수로 바로 정의하세요. -->
+    <script>
+        console.log(add(77,66));
+        // console.log(mult(77,66));
+        
+        //일반적인 함수 정의방법
+        function add (a,b){
+            return a+b;
+        }
+        //함수 , 자료형을 자바 스크립트에서 상수에 참조하는 버릇있다.(js 변수의 타입을 지정하지 않기 때문)
+        //const MULT=function(){} // 그냥 카멜표기법을 사용하면 된다.
+        const mult=function (a,b){//정의한 시점에만 메모리에 저장됨
+            return a*b;
+        }
+        console.log(mult(77,66));
+
+        window.setInterval(clockLog,1000); 
+        //1초마다 매개변수로 작성된 함수를 호출하라 => 콜백함수
+
+        function clockLog() {
+            console.log(new Date().toUTCString());
+            
+        }
+        
+
+        
+        const clockText=function(){
+            clock.innerText=new Date().toLocaleTimeString()
+        }
+        window.setInterval(clockText,1000);
+
+
+        const digitalClockText=function(){
+            digitalClock.innerText=new Date().toLocaleString()
+        }
+        window.setInterval(digitalClockText,1000);
+
+ 
+
+
+
+
+    </script>
+</body>
+</html>

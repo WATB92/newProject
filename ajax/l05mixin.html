@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체에 함수를 복사 및 정의하는 방법</title>
+</head>
+<body>
+    <h1>객체에 함수를 복사 및 정의하는 방법</h1>
+    <h2>****프로토타입언어는 객체를 만들 때 프로토타입을 상속해서 만든다.</h2>
+    <p> __proto__ : 부모를 참조</p>
+    <p> prototype : 함수나 클래스를 정의할 때만 생성된다!!(화살표 함수 제외)</p>
+    <script>
+        let obj={
+            __proto__ : A.prototype
+        };
+        //일반 객체에 this가 아닌 함수를 정의하는 방법
+        //->객체가 생성되고 나서 함수를 정의하는 것은 굉장히 번거롭기 때문이다.
+
+        //1방법 : 객체의 부모타입을 명시(부모를 바꿔치기)
+        function A(){}
+        A.prototype.hello=function(){
+            console.log("A의 프로토 타입의 안녕");
+        }
+        let a=new A();
+        //a.hello();
+        class B{
+            hello(){
+                console.log("B의 프로토 타입의 안녕");
+            }
+            hello2=()=>{
+                console.log("B의 this의 안녕222");
+            }
+            bHello(){
+                console.log("B의 프로토 타입의 b안녕");
+            }
+        }
+        //
+        //Object.assign(대상Object, 복제Object, ... , 복제Object);
+        //복제Object로 prototype Object는 불가능 
+        //assign : Object 더하기
+        let testO={}
+        Object.assign(testO,{a:10,hello:()=>{}},{b:20},{c:30},{a:"안녕",b:"잘가"})
+        console.log(testO);
+        Object.assign(obj,new B());
+        console.log(obj);
+        //Object.setPrototypeOf : 객체를 다른 객체(프로토타입)에 상속 (==obj.__proto__=A.protoType)
+        //Object.setPrototypeOf(object, object);
+        //Object.setPrototypeOf(object, prototype);
+
+        obj={name:"경민",age:38};
+
+        Object.setPrototypeOf(obj,A.prototype); //==obj.__proto__=A.protoType
+        console.log(obj);
+        obj.hello();
+        Object.setPrototypeOf(obj,B.prototype); //부모가 A=>B로 변경(부모가 A,B 두개가 아니다.)
+        console.log(obj);
+        obj.hello();
+        
+        Object.setPrototypeOf(obj,new B());
+        console.log(obj);
+        obj.hello2();//obj.__proto__.hello2() (new B())
+        obj.hello();//obj.__proto__.__proto__.hello2() (B.prototype)
+        
+
+    </script>
+</body>
+</html>

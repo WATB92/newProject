@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async 함수로 스레드 실행을 간단하게 동기화 해봅시다.</title>
+</head>
+<body>
+    <h1>async 함수로 스레드 실행을 간단하게 동기화 해봅시다.</h1>
+    <p>Promise 객체를 실행 후 동기화 하는 함수 async, 
+        자동으로 Promisificatoin 으로 코드를 작성해 주는 함수</p>
+    <ul>
+        <li>async function : 
+            await 로 Promise 객체의 then함수를 실행할수 있다.
+            이때 then의 첫번째 콜백함수의 첫번째 매개변수를 반환한다.
+        </li>
+        <li>let resovle=await new Promise();</li>
+        <li>let respose=await fetch()</li>
+        <li>new Promise().then((resovle,reject)=>{})</li>
+        <li>fetch().then((response)=>{})</li>
+        <li>async 함수로 reject를 반환받고 사용할 수 없기 때문에 
+            try catch 로만 오류를 핸들링한다.
+        </li>
+    </ul>
+    <h2>Promise all과 스레드의 전체 동기화 </h2>
+    <ul>
+        <li>스레드를 생성하는 이유는 빠르게 일을 처리하게 위해서다</li>
+        <li>스레드가 생성되면 코드가 어려워져서 await로 모든 스레드를 동기화 하는 경향있다.</li>
+        <li>모든 스레드를 동기화 하면 처리속도가 느려지기 때문에 꼭 필요한 경우가 아니라면
+            Promise.all로 복수의 스레드를 동기화 하는 것을 권장한다.
+        </li>
+        <li>Promise.all([promise,promise,promise,...])
+            .then(([resolve,resolve,resolve...]))</li>
+        <li>[resolve,resolve,resolve...]=
+            await Promise.all([promise,promise,promise,...])</li>
+    </ul>
+
+    <script>
+        async  function add(a,b){
+            return a+b; //new Promese((resolve)=>{ resolve(a+b); });
+        }
+        console.log(add(10,20));
+        add(10,30).then((msg)=>{
+            console.log(msg);
+        })
+
+
+
+
+        const a=async function(){
+            try{
+                let res=await fetch("../homework/l19baskets.json");
+                //fetch().then((res)=>{})
+
+
+                if(res.status!==200) throw res.status;
+              
+                let obj=await res.json();
+                console.log(obj);
+            
+                res=await fetch("../homework/l18products222.json");
+                if(res.status!==200) throw res.status;
+                obj=await res.json();
+                console.log(obj);
+            }catch(e){
+                alert("통신실패 :"+e)
+            }
+        }
+        a();
+
+        //Promise.all([Promise1,Promise2,...])
+        //.then(([resolve1,resolve2,...])=>{})
+        //스레드를 생성하는 이유 : 일을 동시에 처리해서 빠르게 하기 위해서인데...
+        //10개의 일중에 5개는 동시에 해도 되는데 모든 일을 동기화 해버리는 실수.
+        //1개의 통신이 0.003 초
+        //10개의 스레드를 만들어서 처리했다. 0.003초 
+        //1개의 스레드로 10개의 작업을 하거나 모든 작없은 await 로 동기화 함
+        //0.03 
+
+        function setTimeLog(milliSec){
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    console.log(milliSec+" 밀리초 뒤 안녕");
+                    resolve(milliSec/1000+"초");
+                },milliSec)
+            });
+        }
+        const playSetTimeLog=async function (){
+            
+            let sec1=await setTimeLog(2000);
+            let sec2=await setTimeLog(2000);
+            let sec3=await setTimeLog(2000);
+            let sec4=await setTimeLog(2000);
+            let sec5=await setTimeLog(2000);
+            console.log(sec1+"완료");
+            console.log(sec2+"완료");
+            console.log(sec3+"완료");
+            console.log(sec4+"완료");
+            console.log(sec5+"완료");
+            
+            let secs=await Promise.all([
+                setTimeLog(2000),
+                setTimeLog(2000),
+                setTimeLog(2000),
+                setTimeLog(2000),
+                setTimeLog(2000)
+            ])
+            secs.forEach((sec)=>{
+                console.log(sec+" 완료!"); //15초
+            })
+        }
+        playSetTimeLog();
+
+    </script>
+</body>
+</html>

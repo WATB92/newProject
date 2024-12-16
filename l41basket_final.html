@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 최종버전</title>
+    <link rel="stylesheet" href="./homework/h15style.css">
+</head>
+<body>
+    <h1> 장바구니 최종버전 </h1>
+    <ul id="basketList">
+        <li>
+            <div>
+                <img src="./img/우유.jpeg" alt="더조은컴퓨터 우유 2.3L">
+            </div>
+            <form name="a" action="#" class="basketForm">
+                <h4>
+                    더조은컴퓨터 우유 2.3L
+                </h4>
+                <p><span>4800</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="1">
+                    <input type="hidden" name="title" value="더조은컴퓨터 우유 2.3L">
+                    <input type="hidden" name="price" value="4800">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+        <li>
+            <div>
+                <img src="./img/치즈.jpeg" alt="레지아노치즈">
+            </div>
+            <form name="b" action="#" class="basketForm">
+                <h4>
+                    레지아노치즈
+                </h4>
+                <p><span>12000</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="2">
+                    <input type="hidden" name="title" value="레지아노치즈">
+                    <input type="hidden" name="price" value="12000">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+        <li>
+            <div>
+                <img src="./img/올리브 오일.jpeg" alt="올리브오일 1L">
+            </div>
+            <form action="#" class="basketForm">
+                <h4>
+                    올리브오일 1L
+                </h4>
+                <p><span>22000</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="3">
+                    <input type="hidden" name="title" value="올리브오일 1L">
+                    <input type="hidden" name="price" value="22000">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+        <li>
+            <div>
+                <img src="./img/마늘.jpeg" alt="통마늘 600g">
+            </div>
+            <form action="#" class="basketForm">
+                <h4>
+                    통마늘 600g (세일! 한정수량)
+                </h4>
+                <p><span>6000</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="4">
+                    <input type="hidden" name="title" value="통마늘 600g">
+                    <input type="hidden" name="price" value="6000">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+        <li>
+            <div>
+                <img src="./img/파스타면.jpeg" alt="데체코 랭귀니 1kg">
+            </div>
+            <form action="#" class="basketForm">
+                <h4>
+                    데체코 랭귀니 1kg
+                </h4>
+                <p><span>6700</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="4" selected>4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="5">
+                    <input type="hidden" name="title" value="데체코 랭귀니 1kg">
+                    <input type="hidden" name="price" value="6700">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+        <li>
+            <div>
+                <img src="./img/버터.jpeg" alt="프레지덩 버터 450g">
+            </div>
+            <form action="#" class="basketForm">
+                <h4>
+                    프레지덩 버터 450g
+                </h4>
+                <p><span>9900</span>원</p>
+                <p>
+                    <label>
+                        수량 : 
+                         <select name="cnt">
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                         </select>
+                    </label>
+                </p>
+                <p>
+                    <input type="hidden" name="num" value="6">
+                    <input type="hidden" name="title" value="프레지덩 버터 450g">
+                    <input type="hidden" name="price" value="9900">
+                    <button type="submit">장바구니</button>
+                    <button type="button">바로구매</button>
+                </p>
+            </form>
+        </li>
+    </ul>
+    <div id="selectedList">
+        <h4>
+            장바구니 목록
+            <button id="moveSelectedList">접기</button>
+        </h4>
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                    <th>총가격</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody id="basketCont">
+                <tr id="trEx">
+                    <td>
+                        <b class="title"></b>
+                    </td>
+                    <td class="price"></td>
+                    <td class="cnt"></td>
+                    <td class="total"></td>
+                    <td>
+                         <button class="delBasket" data-num="">상품삭제</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">전체가격 : 
+                        <b id="totalPrice">0</b>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <p>
+            <button id="printBasketsBtn">장바구니 출력</button>
+        </p>
+    </div>
+    <script>
+        const basketCont=document.getElementById("basketCont");
+        const trEx=document.getElementById("trEx");
+        const totalPrice=document.getElementById("totalPrice");
+        const printBasketsBtn=document.getElementById("printBasketsBtn");
+        const basketFormArr=document.querySelectorAll(".basketForm");
+
+        //데이터베이스에서 장바구니에 담긴 내역 받아오기
+        const baskets={
+            2 : { num:2, title:"레지아노치즈",cnt:4, price:12000, total:48000 },
+            4 : { num:4, title:"통마늘 600g",cnt:2, price: 6000, total:12000 },
+            6 : { num:6, title:"프레지덩 버터 450g", cnt:5, price: 9900, total:49500 },
+            total : 109500
+        };
+        //받아온 데이터를 수정 :this를 많이 사용하기 때문에 function을 사용하는 것을 권장
+        baskets.setBasket=function(basket){
+            if(basket.num in this){//등록된 상품이 있을때 기존에 더했던 가격을 삭제
+                this.total-=this[basket.num].total;
+            }
+            this[basket.num]=basket;
+            this.total+=basket.total;
+        }
+        baskets.delBasket=function(num){
+            this.total-=this[num].total;
+            delete baskets[num];
+        }
+        class Basket{
+            constructor(form){
+                this.num=Number(form.num.value);
+                this.title=form.title.value;
+                this.cnt=Number(form.cnt.value);
+                this.price=Number(form.price.value);
+                this.total=this.cnt*this.price;
+            }
+        }
+
+        const printBaskets=()=>{
+            basketCont.innerHTML="";
+            for(let key in baskets){
+                if(key === "total"){
+                    let total=document.createTextNode(baskets[key]);
+                    totalPrice.replaceChildren(total);
+                }else if(!isNaN(key)){ //key Number일때는 상품만 참조합니다.
+                    let tr=trEx.cloneNode(true);
+                    tr.removeAttribute("id");
+                    tr.querySelector(".title").innerText=baskets[key].title;
+                    tr.querySelector(".price").innerText=baskets[key].price;
+                    tr.querySelector(".cnt").innerText=baskets[key].cnt;
+                    tr.querySelector(".total").innerText=baskets[key].cnt*baskets[key].price;
+                    tr.querySelector(".delBasket").dataset.num=baskets[key].num;//dataset == data- : 사용자 지정속성
+                    basketCont.append(tr);
+                    tr.querySelector(".delBasket").onclick=(e)=>{
+                        //delete baskets[Number(e.target.dataset.num)]; //필드에 직접 접근
+                        baskets.delBasket(Number(e.target.dataset.num))
+                        printBaskets();  
+                    }
+                }
+            }
+        }        
+        const basketFormSubmitHandler=(e)=>{
+            e.preventDefault();
+            let b=new Basket(e.target);
+            //baskets[b.num]=b; //필드에 직접 접근 
+            baskets.setBasket(b);
+            printBaskets();
+        }
+        basketFormArr.forEach((form)=>{
+            form.onsubmit=basketFormSubmitHandler;
+        })
+        
+        printBasketsBtn.onclick=printBaskets;
+
+    </script>
+</body>
+</html>

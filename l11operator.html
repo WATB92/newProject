@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수의 연산자</title>
+</head>
+<body>
+    <h1>수를 이용한 연산자들</h1>
+    <p>수는 다양한 연산자를 지원하고 있고 이런 연산자를 이용해서 프로그램을 기획할 수 있다.</p>
+    <h2>수학 연산</h2>
+    <ul>
+        <li>+19 : 양수</li>
+        <li>-19 : 음수</li>
+        <li>19+11 : 덧셈</li>
+        <li>19-11 : 뺄셈</li>
+        <li>19*11 : 곱셈</li>
+        <li>19/11 : 나눗셈</li>
+        <li>19%4 : 나머지연산(3)</li>
+        <li>2**3 : 거듭제곱(8)</li>
+    </ul>
+    <h2>대입연산(수학연산) : 나 자신에게 바뀐 값을 대입</h2>
+    <p>이항연산은 모두 가능 +=, -=, *=, /=, %=,**=</p>
+    <h2>증감연산 : 하나 증가시키거나 감소시킨 값을 대입하는 연산</h2>
+    <ul>
+        <li>++a : a를 먼저 1증가시키고 다음 연산을 하라</li>
+        <li>a++ : 연산이 있으면 연산을 먼저 하고 a를 1 증가시켜라</li>
+        <li>--a : a를 먼저 1감소시키고 다음 연산을 하라</li>
+        <li>a-- : 연산이 있으면 연산을 먼저 하고 a를 1 감소시켜라</li>
+    </ul>
+    <h2>비트 연산 : 수가 비트정보로 저장되어 있기 때문에 비트 연산이 가능하다.</h2>
+    <ul>
+        <li><<&lt;  : left shift</li>
+        <li>>>&gt; : right shift</li>
+        <li>~ : Not(보수연산)</li>
+        <li>13 % 11: And(곱하기) 1101 & 1011 = 1001 : 둘 다 1일때 1</li>
+        <li>13 | 11: or(더하기) 1101 ㅣ 1011 = 2112 (이진수 0,1) = 1111 둘 중에 한개라도 1이면 1</li>
+        <li>13 ^ 11: XOR : (0 ^ 1 = 1)</li>
+        
+    </ul>
+    <script>
+        //console.log( 19//4 ); 파이썬에서 나눠지는 몫 ==> 4
+        let a=10;
+        a=a+2; //12
+        console.log(a);
+        a=a-5
+        console.log(a);
+        
+        a+=10 //17 => a=a+10
+        console.log(a);
+
+        a=2;
+        a**=5;
+        console.log(a);
+        a=a%6;
+        console.log(a);
+        console.log("###################");
+        
+        
+        let b=0; //2 전역변수
+        //0000<<2
+        console.log(b<<2);
+        b=1;
+        //0001 <<2
+        //0100 <<2
+        console.log(b<<2);
+        b=13;
+        //1+4+8 = 1101 >>2
+        //0011 = 3
+        console.log(b<<2);
+        // ~ 00001101
+        // . 11110010 -14
+        //  000000000 -0 x -> 1
+        console.log(~b);
+        let e=11; //e=1011
+                  //b=1101
+                  //l=1111
+                  //&=1001
+        console.log(Number (e).toString(2)); //특정 진수로 출력
+        console.log(e&b); // 9
+        console.log(e|b); // 15
+        console.log("e^b=",e^b); // 1^0=>1 나머지는 0
+         //0110 = 4,2 = 6
+
+        console.log(Number(32) .toString(2)); // = 100000
+        console.log(Number(19).toString(2)); // =  010011
+        console.log(32 & 19);
+        console.log(32 | 19);
+        
+        console.log(Number(44) .toString(2)); // = 101100
+        console.log(Number(24) .toString(2)); // = 011000
+        console.log(44 & 24);
+        console.log(44 | 24);
+        
+        
+
+        //32& 19 = 0
+
+        //32 |19 = 110011 = 51
+                  32,16,2,1 
+        
+        //44 & 24 = 001000 = 8
+        //44 | 24 = 111100 = 60
+                   32,16,8,4
+
+        
+        
+        
+        console.log("###################");
+        
+
+        ++b;
+        console.log(b); //1
+        console.log(++b); //++b : b를 1증가시키고 log함수를 실행하라      
+        console.log(b++); //b++ : log함수를 실행하고 b를 1증가시켜라
+        console.log(b); //3
+        {
+            let c=b++*3
+            console.log(c);
+        }
+        {
+            let c=++b*3
+            console.log(c);
+        }
+
+        console.log("###################");
+        
+        let c=(++b)*3 //연산 (b*3)을 먼저 하고 b를 1 증가시켜라
+        console.log(c);
+
+       
+    </script>
+</body>
+</html>

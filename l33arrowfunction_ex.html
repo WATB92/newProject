@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴파일 시점에 this 위치에 따라서 바인딩되는 화살표 함수 이용하기</title>
+</head>
+<body>
+    <h1>컴파일 시점에 this 위치에 따라서 바인딩되는 화살표 함수 이용하기</h1>
+    <p>함수의 this는 함수를 포함하는 객체를 바인딩하지만 화살표 함수가 선언된 시점에
+        존재하는 위치에 this가 바인딩된다. 그것은 이용하는 예시입니다.
+    </p>
+    <h5 id="clock1"></h5>
+    <h5 id="clock2"></h5>
+
+    <ul>
+        <li><button id="clock1startBtn">시계1의 시작 (콜백 함수를 함수로)</button></li>
+        <li><button id="clock2startBtn">시계2의 시작 (콜백 함수를 화살표 함수로)</button></li>
+    </ul>
+    <script>    
+        // const digiClock=function(){
+        //     //clock1.innerText=new Date().toLocaleString();
+        //     //버튼에 시간을 출력
+        //     this.innerText=new Date().toLocaleString();
+        //     //this == clock1startBtn (X)
+        //     //window.setInterval(digiClock) this ==window
+        // }
+        // clock1startBtn.onclick=function(){
+        //     window.setInterval(digiClock, 1000)
+        // }
+
+
+
+
+        clock1startBtn.onclick=function(){
+            window.setInterval(function() {
+                this.innerText=new Date().toLocaleString();
+                //this ==clock1StartBtn이구나
+                //현재 해당 콜백 함수는 window.setInterval의 실행중이기 때문에 this는 window다.
+
+            }.bind(clock1startBtn),1000)
+        }
+        
+        clock2startBtn.onclick=function(){
+            window.setInterval(()=>{
+                this.innerText=new Date().toLocaleString();
+                //this == clock2startBtn 가지고 있는 블럭을 무시하고 
+            },1000)
+        }// 화살표 함수의 this는 객체와는관련 없이 컴파일 되면서 해당 위치의 상위 객체를 바인딩 한다.
+        
+    </script>
+</body>
+</html>

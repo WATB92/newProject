@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 반복문 연습문제</title>
+</head>
+<body>
+    <h1>for 반복문 연습문제</h1>
+    <script>
+//1.구구단을 출력하는 함수를 만드세요.
+//gugudan(2);
+//2*1=2
+//2*2=4
+//2*3=6
+//...
+//2*9=18
+//gugudan(9);
+//9*1=9
+//9*2=18
+//....
+//9*9=81
+function gugudan(dan){
+    //자바스크립트가 엔터를 ";"으로 자동인지 하기 때문
+    let str =` ${dan} 단 시작\n`;
+    for(let i=1; i<10; i++){
+        //str+=(dan+"X"+i+"="+dan*i)+"\n";
+        str+=` ${dan} X ${i} = ${dan*i}\n`;
+        //${}표현식을 사용할 수 있는 문자열(백틱), ''==""   `` 
+    }
+    return str; //함수가 종료
+}
+let dan2=gugudan(2);
+console.log(dan2);
+console.log(gugudan(19));
+
+//2. 
+//powArr(2); => [1,2,4,8,16 ... 1024] 배열을 반환
+//powArr(3); => [1,3,9,27,81 .... 59049] 
+function powArr(num){
+    let arr=[];
+    //arr[3]=1024; //특정 인덱스에 데이트를 참조하면 나머지는 undefined가 된다.
+    //[undefined,undefined,undefined,1024] empty*3==undefined*3
+    //arr.push(100) //마지막 인덱스 다음에 data가 참조된다.
+    for(let i=0; i<11; i++){
+        //arr.push(num**i);
+        arr[i]=Math.pow(num,i);
+    }
+    return arr;
+}
+let arrPow3=powArr(3);
+console.log(arrPow3);
+console.log( powArr(8));
+console.log(powArr(999)); //9.900448802097483e+29 
+console.log(powArr(-999999999999999999999999999999999)); 
+//Infinity : 지수로부로 표현할 수 없는 엄청큰 수다->이정도면 무한대라 할 수 있다.
+console.log(-Infinity);
+//단순할수록 함수를 재사용하기 좋다.!
+function setGrade(score){
+    let key=Math.floor(score/10); //버림 6.6 => 6
+    //95/10 9.5 반올림 10-9=1
+    //94/10 9.4 반올림 9-9=0
+    //"+"일때 반올림(round,ceil,floor) 점수와 버림 점수를 빼면 무조건 1이 나온다.
+    let plus="";
+    if( (Math.round(score/10)-key) === 1 ){
+        plus="+"
+    }
+    let grade;
+    if(key===10){grade="A+";}
+    else if(key<6){grade="F"}
+    else{
+        if(key===9){grade="A";}
+        else if(key===8){grade="B";}
+        else if(key===7){grade="C";}
+        else if(key===6){grade="D";}
+        grade+=plus;
+    } 
+    return grade;
+}
+
+
+//3.let scores=[66, 77, 90, 80 ,50, 88] 
+//  let grades=[]
+//  위의 scores를 성적내서 grades로 반환하는 함수를 만드세요
+//=>["D","C","A","B","F","B"]
+function setGrades(scores){
+    let grades=[]
+    //let gradeObj={6:"D",7:"C",8:"B",9:"A",10:"A"}
+    //object key를 이용해서 if문 대신 사용하기 (js 개발자들이 애용하는 방법)
+    //return gradeObj[key]
+    for(let i=0; i<scores.length; i++){
+        let grade=setGrade(scores[i]);
+        grades.push(grade);
+    }
+    //void == return undefined; == return
+    //(*void 함수가 특정 위치에서 종료하고 싶을 때 사용);
+    return grades;
+}
+let scores=[10, 77, 90, 80 ,50, 88];
+console.log(setGrades([66, 77, 90, 80 ,50, 88, 100]));
+
+
+
+
+
+    </script>
+</body>
+</html>

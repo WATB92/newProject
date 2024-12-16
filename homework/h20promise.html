@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise 실습</title>
+    <style>
+        #ex{
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded",init);
+        function init(){
+            const productTbody=document.getElementById("productTbody");
+            const ex=document.getElementById("ex");
+            new Promise((resovle)=>{
+                const req=new XMLHttpRequest();
+                req.open("GET","./l18products.json");
+                req.send()
+                req.onload=()=>{
+                    let json=req.responseText;
+                    let products=JSON.parse(json);
+                    products.forEach((p)=>{
+                        let tr=ex.cloneNode(true);
+                        tr.removeAttribute("id");
+                        for(let key in p){
+                            let td=tr.querySelector("."+key); //[]속성선택자
+                            td?.append(document.createTextNode(p[key]));
+                            console.log(key,td);
+                        }
+                        productTbody.append(tr);
+                    });
+                    resovle("상품 다운 및 출력 끝")
+                }
+            }).then((msg)=>{
+                //alert(msg);
+                const req=new XMLHttpRequest();
+                req.open("GET","./l19baskets.json");
+                req.send();
+                req.onload=()=>{
+                    let baskets=JSON.parse(req.responseText);
+                    console.log(baskets);
+                    for(let num in baskets){
+                        if(isNaN(num))continue;
+                        let basket=baskets[num];
+                        let tr=ex.cloneNode(true);
+                        tr.removeAttribute("id");
+                        for(let key in basket){
+                            let td=tr.querySelector("."+key);
+                            td.innerText=basket[key]
+                        }
+                        productTbody.append(tr);
+                    }
+                }
+            })            
+        }
+    </script>
+</head>
+<body>
+    <h1>promise 실습</h1>
+    <h2>장바구니를 먼저 출력하고 상품을 출력하세요(Promise)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>num</th>
+                <th>title</th>
+                <th>price</th>
+                <th>cnt</th>
+                <th>total</th>
+                <th>img</th>
+            </tr>
+        </thead>
+        <tbody id="productTbody">
+            <tr id="ex">
+                <td class="num"></td>
+                <td class="title"></td>
+                <td class="price"></td>
+                <td class="cnt"></td>
+                <td class="total"></td>
+                <td class="img" src=""></td>    
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

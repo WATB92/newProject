@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document 객체에 대해 알아봅시다.</title>
+</head>
+<body>
+    <h1 id="title">document 객체에 대해 알아봅시다.</h1>
+    <ul>
+        <li>브라우저의 2개의 엔진이 html문서를 url을 통해 받는다.(https://www.naver.com/index.html)</li>
+        <li class="red">엔진이 /index.html의 태그 구조를 분석해서 트리구조(Dom Tree)를 구성한다.</li>
+        <li>트리의 순서대로 태그를 객체로 만들고 렌더링합니다.</li>
+        <li class="red">만약 태그중에 script 태그가 존재하면 자바스크립트 엔진이 동작하고 현재까지 만들어진
+            객체를 넘겨 받습니다.window.document
+        </li>
+        <script>//아래의(형제) li 태그는 document에 존재하지 않는다.
+            //태그를 찾는 함수
+            let lis=document.getElementsByTagName("li");
+            console.log(lis); // 4
+            
+
+
+        </script>
+        <li class="red">getElementsByTagName("태그이름") : document 태그를 찾는 함수를 제공합니다.
+
+            (return HTMLCollection; Array 보다는 가벼운 시퀀스 자료형,브라우저 메모리 부족을 막기위해)
+        </li>
+        <li>getElementsByClassName("클래스명") : 속성 태그를 찾는 함수 </li>
+        <li class="red">getElementsById("아이디명") : id 속성의 태를 한개 찾는 함수
+            <ul>
+                <li>id를 정의하면 script 내에서 사용 가능한 변수가 자동생성 된다.</li>
+                <li>하지만 id가 복수개 있다면 HTMLCollection을 반한다.</li>
+                <li>만약 존재하지 않는 다면 undefined와 함께 오류가 발생할 수도 있다.</li>
+                <li>때문에 지정 id 변수보다 getElementById로 직접 찾아서 사용하는 것이 좋다.</li>
+            </ul>
+        </li>
+
+        <li>(모든 태그 객체==ElementNodeObject).style : 요소에 직접 작성하는 스타일
+            <ul>
+                <li>background-color : -가 포함된 이름은 카멜 표기법으로 바꿔서 사용(backgroundColor)</li>
+                <li>width:130px 수치+문자열로 꼭 작성해야 합니다. style.width="130px"
+                </li>
+                <li>요소에 직접 작성되는 스타일이기 때문에 모든 스타일(외부,내부)보다 우선순위가 높다</li>
+            </ul>
+        </li>
+        <li>모든 태그는 텍스노드를 조회하거나 변경할 수 있다.: .innerText, .innerText=""</li>
+        <li>모든 태그는 자식의 html을 조회하거나 변경할 수 있다.: .innerHTML, .innerHTML=""</li>
+        <li>모든 태그는 이벤트를 재정의 할 수 있다.</li>
+        <ul>
+            <li>마우스 이벤트 : 거의 모든 태그에서 정의 가능</li>
+            <li>키보드 입력 이벤트 : input 요소에서 정의 가능</li>
+            <li>기타 입력 장치 이벤트</li>
+        </ul>
+        <style>
+            /* cascading ss */
+            /* 141 */
+            .a{text-decoration: underline;}
+            .b{font-weight: bold;}
+            /* 한개의 노드를 선택자를 찾을때는 꼭 붙여서 작성 */
+            /* div .a : div 내부의 자손 .a 모두 */
+            li.a.b.c.d.e.f.g.h.i.j.k.l.m.n{
+                color: red;
+            }
+            /* 101 */
+            li#ab{
+                color: blue;
+            }
+        </style>
+        <li>className은 띄어쓰기를 해서 다른 이름을 구분한다.</li>
+        <li class="a b c d e f g h i j k l m n" id="ab">cssSelector로 찾는 복수 노드개체 반환
+            ::document.querySelectorAll("선택자") NodeList(forEach)
+        </li>
+        <li>cssSelector로 찾는 단수 노드개체 반환 :document.querySelector("선택자")</li>
+        <li>node.className : 해당 노드의 클래스 이름을 전체 문자열로 반환</li>
+        <li>node.classList : 해당 노드의 클래스를 리스트로 반환 DOMTokenList</li>
+            <ul>
+                <li>add("className") : 해당 노드에 클래스를 추가 (이미 존재하면 추가하지 않음)</li>
+                <li>remove("className") : 해당 노드에 클래스를 삭제</li>
+                <li>toggle("className") : 해당 노드에 클래스가 없으면 추가 있으면 삭제</li>
+                <li>contains("className") : 해당 노드에 클래스가 ㅇ벗으면 false 있으면 true</li>
+                <li>forEach((val,i,arr)=>{})</li>
+            </ul>
+
+
+
+    </ul>
+    <h2 id="title2">아이디는 2개이상 정의하면 안되지만 실수로 정의하면 브라우저가 복수로 반환</h2>
+    <script>
+        //모든 태그가 객체가 되어서 script 태그 내에서 읽을 수 있는 곳
+        lis=document.getElementsByTagName("li")
+        console.log(lis);
+        let reds=document.getElementsByClassName("red")
+        console.log(reds);
+        //for of 반복문으로 li의 style의 color를 red로 바꾸세요.
+        // for(let red of reds){
+        //     red.style.color="red";//body 하위의 모든 요소는 style 속성이 존재한다.
+            
+        // }
+        //lis들 중에 class가 red인 것만 마우스를 클릭하면 글씨를 붉게 바꾸세요!
+        // for(let red of reds){
+        //     red.onmouseenter=()=>{
+        //         red.style.color="red"
+        //     }
+        //     red.onmouseenter=function(){
+        //         red.style.color="black"
+        //     }
+        // }
+
+       
+        console.log(title); // 브라우저가 title을 찾아서 지정해놓음 (개발자 믿음 제로)
+        
+        let titleNode=document.getElementById("title")//무조건 한개를 반환!
+        console.log(titleNode);
+
+
+        let title2Node=document.getElementById("title2");
+        console.log(title2Node); //(undefined,null)
+        console.log(title2);
+        //**정의되지 않은 아이디를 찾았을 때 없다는 의미로 null을 출력하는 것이 undefined의 오류보다 훨씬 좋다.
+        
+        
+        
+        //querySelectorAll("Css Selector"); return NodeList;
+        //let liArr=document.querySelectorAll("Ul>li.red");
+        let liArr=document.querySelectorAll("[class=red]");
+        let li=document.querySelector("[class=red]");
+        //복수의 검색을 작성해도 무조건 1개 반환 (맨 청므 찾아지는 것 1개)
+        //선택자 점수 태그이름 1점> 클래스 10점> 아이디 100점> !important
+        console.log(liArr);
+        console.log(li);
+        
+        console.log(ab.className); // a b c d e f g h i j k l m n
+
+        console.log(ab.classList); // 사용권장
+        // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 
+        //value: 'a b c d e f g h i j k l m n']
+        console.log(ab.classList.contains("a"),ab.classList.contains("z"));
+        ab.classList.add("jsStudy");
+        ab.classList.add("jsStudy"); // 여러번 같은 이름의 클래스를 더해도 한번만 더한다.
+        console.log(ab.className);
+
+
+
+        ab.classList.remove("jsStudy");
+        console.log(ab.className);
+
+        ab.classList.toggle("jsStudy");//없으면 추가
+        console.log(ab.className);
+        ab.classList.toggle("jsStudy");//있으면 삭제
+        console.log(ab.className);
+
+        ab.classList.replace("a","A"); // 해당 클래스명을 바꾼다.
+        console.log(ab.className);
+        
+        
+        
+    </script>
+</body>
+</html>

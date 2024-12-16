@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼요소와 입력요소에 대해 알아봅시다!</title>
+</head>
+<body>
+    <h1>폼 요소와 입력요소에 대해 알아봅시다!</h1>
+    <h2>폼 요소와 액션과 입력요소</h2>
+    <ul>
+        <li>form : 복수의 데이터를 특정 서버에 보내기 위한 양식이다.(회원가입 양식)</li>
+        <li>form.action : 양식을 보내는 리소스 위치(회원가입 처리 액션 페이지)</li>
+        <li>form.name == form.id : 고유 선택자 ==> js forms[name or id] forms.signupForm,
+            forms["signupForm"]
+        </li>
+        <li>input.type=text : 서버에 보낸 데이터를 입력하는 곳</li>
+        <li>input.name : 1. 서버에 보내는 파라미터의 이름, 
+            2. form 요소의 하위 개체(필드)처럼 접근 가능 forms.signupForm.userId</li>
+        <li>input.value : 유저가 입력할 값 또는 기본값</li>
+        <li>제출 url : http://127.0.0.1:5500/signup.action?userId=WATB&username=%EC%9D%B4%EC%9E%AC%EB%8D%95</li>
+        <li>http://127.0.0.1:5500 : 제출할 리소스가 있는 서버의 위치 
+            (네이버 서버가 실행되고 있는 컴퓨터 위치 == www.naver.com)</li>
+        <li>signup.action : 서버에서 배포하거나 실행중인 리소스 (저장된 파일==path)</li>
+        <li>?userId=WATB&username=%EC%9D%B4%EC%9E%AC%EB%8D%95 : ? 다음을 쿼리 스트링
+            파라미터를 규칙대로 나열한 것(userId=WATB&username=이재덕)
+            ,&파라미텉 구분,= : key와 value 구분
+        </li>
+        <li>
+            %EC%9D%B4%EC%9E%AC%EB%8D%95 (이재덕) : 한글을 바이트 단위로 16진수로 표현한것
+            (url인코딩:한글->16진수로, 공백->+)
+        </li>
+        <li>label : input 요소를 focus 하는 용도로 사용됨 
+            (input 요소가 작거나 완전히 다른 input요소로 만들때) </li>
+            <ul>
+                <li>label>input 포함 시켜서 작성 : label에 for을 지워야 한다. </li>
+                <li>label[for=id]을 input#id과 상관없는 외부에 작성 후 label의 for에 id를 대응시킨다.</li>
+                <li>onfocus : input 요소를 작성하기 위해서 클릭하면 발생하는 이벤트</li>
+                <li>onblur : focus를 하고 있다가 벗어나는 상태</li>
+            </ul>
+    </ul>
+    <li>input [type=checkbox] : 체크박스는 하나의 이름으로 복수의 데이터를 보낼때 사용됩니다.
+        <ul>
+            <li>checked : true or false 를 갖는데 존재하면 true 없으면 false 입니다
+                <ul>
+                    <li>checked="checked"(x) => true</li>
+                    <li>checked="true" (x)=> true : 문자열 true는 의미가 없다.</li>
+                    <li>checked="false" (x)=> true : 작성하는 것 자체가 true</li>
+                    <li>checked (o) 예) forms.form.checkbox.checked=(true or false)</li>
+                </ul>
+            </li>
+            <li>onchange : checked의 boolean 데이터가 바뀔때마다 실행되는 이벤트 함수</li>
+            <li>oniput : checkbox를 눌르기만 하면 발생하는 이벤트</li>
+            <li>RadioNodeList : type이 checkbox와 radio인 input을 name 같은 것만 묶어서 배열로 반환</li>
+            
+        </ul>
+        <li>input [type=radio] : 라디오 버튼은 하나의 이름으로 복수의 데이터 중 하나를 선택해서 보낼 때 사용됩니다.
+            나머지는 checkbox와 같은데 선택된 input이 있으면 RadioNodeList의 value가 참조한다.
+        </li>
+        <li>button[type=sumit(생략)]==input[type=sumit] :
+            양식을 action에 작성된 리소스에 제출하는 버튼
+            <ul>
+                <li>onclick, oninput : 누를 때 이벤트가 발생</li>
+                <li>onsubmit : 버튼을 포함하는 form의 submit 이벤트(양식을 제출)를 발생시킨다. 
+                    (버튼에는 이벤트가 발생하지 않는다.)
+                </li>
+                <li>function(e){} : 이벤ㅌ트를 재정의할 떼 사용할 수 있는 e는 이벤트 정보를 담고 있다.
+                    (e.target==this 이벤트가 발생한 대상)
+                </li>
+                <li>e.preventDefult() : 이벤트를 강제 종료하는 함수, 이벤트의 연쇄 작용을 끊는다. 
+                    예) 마우스 클릭(onclick(e))-> ( button.input(e), form.submit(e)) (연쇄)
+                </li>
+            </ul> 
+        </li>
+    </li>
+    <form action="./signup.action" name="signupForm" is="signupForm">
+        <label>
+            유저 아이디(라벨이 인풋요소 포함) : 
+            <input type="text" name="userId" value="WATB">
+        </label>
+        <br>
+        <label for="username">유저이름(라벨이 인풋요소의 외부) : </label>
+        
+        <input type="text" name="username" id="username" value="이재덕">
+        <br>
+        <h5>취미</h5>
+        <p id="checkHobbies"></p>
+        <label>
+        농구 :<input type="checkbox" name="hobby" value="농구">
+
+        </label>
+        <label>
+        축구 :<input type="checkbox" name="hobby" value="축구"checked>
+    
+        </label>
+        <label>
+        야구 :<input type="checkbox" name="hobby" value="야구"checked>
+        
+        </label>
+        <label>
+        화장 :<input type="checkbox" name="hobby" value="화장" >
+            
+        </label>
+
+        <h5>성별</h5>
+        <label>
+            여성 :<input type="radio" name="gender" value="female" >       
+        </label>
+        <label>
+            남성 :<input type="radio" name="gender" value="male" >       
+        </label>
+        <input name="submitBtn" type="submit" value="서브밋버튼">
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <script>
+const signupForm=document.forms["signupForm"];
+        //const submitBtn=signupForm.querySelector("[type=submit]")
+        const submitBtn=signupForm.submitBtn;
+        const checkedHobbies=document.getElementById("checkedHobbies")
+        //onclick : 마우스로 요소를 누름
+        //oninput : 입력요소(type=text)가 키보드에 의해 눌릴때마다 이벤트발생
+        signupForm.userName.oninput=function(e){
+            console.log(this.value); 
+
+        }
+        signupForm.onsubmit=function(e){
+            //e.preventDefault();//양식제출을 막는다. 시도(실패!)
+            //submit 버튼은 혼자 이벤트를 발생시키지 않고 form요소와 같이 이벤트를 발생시키기 때문에
+            //form 요소의 submit 이벤트를 막을 수 없다.=>연쇄 이벤트를 막으면 종종 submit이 막힐 수도 있다.
+            e.preventDefault();
+            console.log(signupForm.hobby);
+
+            let checkVals=checkHobbies(signupForm.hobby);
+            console.log(checkVals);
+            checkedHobbies.innerText=checkVals;
+        }
+
+        function checkHobbies(checks){ //[input[type=check,value=농구] ......]
+            let checkVals=[]; //['축구','테니스']
+            for(let checkBox of checks){
+                if(checkBox.checked){
+                    checkVals.push(checkBox.value);
+                }
+            }
+            return checkVals;
+        }
+    </script>
+</body>
+</html>

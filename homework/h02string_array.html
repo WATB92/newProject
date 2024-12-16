@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열과 배열 실습</title>
+</head>
+<body>
+    <h1>문자열과 배열 실습</h1>
+    <ul>
+        <li>"안녕" == "안녕" : true (왜?): value 값이 같기 때문에</li>
+        <!-- 동등 비교 연산은 값을 비교하는 연산이기 때문에 기본 데이터로 true를 변환 -->
+        <li>"안녕" == new String("안녕") : ture /value를 비교하고 기본형과 자료형은 같기 때문에 </li>
+        <!-- 자료형에서 값이 존재하면 값을 빼와서 비교한다 -->
+        <li>"안녕" === new String("안녕") :false/ 기본형과 자료형은 저장 장치가 다르기 때문에 </li>
+        <!-- 완전 동등 비교 연산 기본형과 자료형을 비교했기 때문에 false를 변환 -->
+        <li>['안','녕'] == ['안','녕'] : false/ 자료형은 비교할 수 없다.</li>
+        <!-- 자료형은 값이 존재하지 않기 때문에 비교연산을 할 수 없다 .  -->
+        <li>new String("안녕") ==new String("안녕")</li>
+        <!-- 랩퍼 클래스의 자료형은 값을 참조하기 때문에 값을 비교해서 true 여야 하지만 
+            결과는 false, 동등 비교 연산에 값이 존재해야 자료형에서 값을 찾는다. -->
+        <li>사과, 배, 자두, 딸기 를 순서대로 저장하는 배열 자료를 생성해 보세요.</li>
+        <li>위 자료에서 index 가2인 자료를 출력하세요.</li>
+        <li>위 자료에 '수박'을 추가하세요. </li>
+        <li>위 자료의 길이를 출력하세요.</li>
+        <li>typeof "안녕" : </li>
+        <!-- "String" typeof 연산자는 기본형은 각자 이름(boolean, number)으로 변환한다. -->
+        <li>typeof new String("안녕") : </li>
+        <!-- 모든 자료형ㅇ을 object로 변환한다. -->
+    </ul>
+    <script>
+        console.log("안녕"=="안녕");
+        
+        let primitveStr="안녕"
+        let objStr=new String("안녕")
+        console.log(primitveStr==objStr);
+        console.log(primitveStr===objStr);
+
+        arr=["안","녕"]
+        arr2=["안","녕"]
+        console.log(arr==arr2); 
+
+        let arr3=['사과','배','자두','딸기']
+        console.log(arr3);
+
+        document.write(arr3[2])
+
+        arr3.push("수박"); arr3[4]="수박"
+        console.log(arr3);
+
+        arr3.length
+        
+
+
+    </script>
+</body>
+</html>

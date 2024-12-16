@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch api로 간편하게 비동기식 통신을 하자!</title>
+</head>
+
+<body>
+    <h1>fetch api(Application Programming Interface)로 간편하게 비동기식 통신을 하자!</h1>
+    <p>XMLHttpRequest가 어려워 새롭게 등장한 함수 fetch</p>
+    <ul>
+        <li>fetch+Promise 가 결합한 형태로 실행(통신)을 동기화 하고 있습니다.</li>
+        <li>fetch 첫번째 then((res)=>{}) 의 콜백함수에서는 꼭 응답 받을 내역을 어떻게 처리할 건지
+            정해서 반환해야한다. 이때 반환하는 타입은 Promise입니다.
+            <ul>
+                <li>res.brob(); : 파일형식으로 응답처리(jpeg,mp3,pdf,mp4..)</li>
+                <li>res.text(); : 문자열로 처리(xml,html,scv)</li>
+                <li>res.json(); : json이니까 Object로 처리</li>
+            </ul>
+        </li>
+        <li>두번째 then((obj)=>{}) : 첫번째 then에서 처리한 결과를 매개변수로 받는다.
+            (==onload)
+        </li>
+        <li>fetch는 Promise의 reject 대신 catch 를 사용해야하기 때문에 throw로  
+            강제 에러를 발생시켜 예외 위임을 해야한다.
+        </li>
+    </ul>
+    <script>
+        function fetch2(url) {
+            return new Promise((resolve) => {
+                const req = new XMLHttpRequest();
+                req.open("GET", "../homework/l19baskets.json")
+                req.send();
+                req.onload = () => {
+                    let obj = JSON.parse(req.responseText);
+                    console.log(obj);
+                }
+            });
+        }
+        // fetch2("../homework/l19baskets.json").then((obj)=>{
+        //     console.log(obj);
+        // })
+
+        // fetch("../homework/l18products.json").then((res)=>{
+        //     return res.json();
+        // }).then((obj)=>{
+        //     console.log(obj);
+        // });
+        //fetch api는 reject 를 사용할 수 없다. catch 존재
+        fetch("../homework/l19baskets22.json",{method:"GET"})
+            .then(res => {
+                if(res.status!==200){
+                    throw res.status; //오류를 강제로 발생시켜서 위임
+                }
+                return res.json(); //404 페이지는 html이기 때문에 synstanx 오류 발생한다.
+            }).then((obj)=>{
+                container.append(JSON.stringify(obj))
+                return fetch("../homework/l18products.json");
+            }).then(res=>res.json())
+            .then((obj)=>{
+                container.append(JSON.stringify(obj))
+            }).catch((code)=>{
+                alert("통신실패 : "+code)
+            })
+    </script>
+    <div id="container"></div>
+
+</body>
+
+</html>

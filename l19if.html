@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if 제어문</title>
+</head>
+<body>
+    <h1>if 제어문</h1>
+   <p>특정 조건에 따라서 어떻게 행동(연산) 해야 하는지 물어보는 제어문 if</p> 
+   <script>
+    if(true){
+        //실행이 되는 블럭!
+        console.log("if 조건이 true면 실행 되는 블럭");
+        
+    }
+    if(false){
+        console.log("무시되는 블럭");
+        
+    }
+    //입력하는 수가 짝수인지 홀수인지 검사하는 제어문
+    let num=7; //홀수 
+
+    if(num%2==1){
+        console.log("홀수 입니다");
+                
+    }
+    if(num%2==0){
+        console.log("짝수 입니다.");
+    
+    }
+    //if else : if 조건이 아니면 모두다 else다
+    function ifTest(){
+    let su=prompt("수를 입력하면 홀짝을 알려줍니다.")
+    if (su%2==0) {
+        alert("짝수 입니다.")
+    }else{
+        alert("홀수 입니다.")
+    }
+    }
+    //ifTest()
+
+
+
+    //else if (그 밖의 이 조건이면)
+    //입력한 수가 양인지 음인지 0인지 출력하는 제어문 제작
+    let x="gg";
+
+    if(x===0){ //x==0 (""==0 : true)
+        console.log("x는 0입니다.");
+        
+    }else if(x>0){
+        console.log("x는 양입니다.");
+        
+    }else if(x<0){
+        console.log("x는 음입니다.");
+        
+    }else{//"안녕">0 => NaN
+        console.log("x는 수가 아닙니다.");
+        
+    }
+
+//////////////////////////////////////////////////////////////////////
+
+
+    if(x===0){ //x==0 (""==0 : true)
+        console.log("x는 0입니다.");
+        
+    } if(x>0){
+        console.log("x는 양입니다.");
+        
+    }if(x<0){
+        console.log("x는 음입니다.");
+        
+    }if(isNaN(x)){//"안녕">0 => NaN
+        console.log("x는 수가 아닙니다.");
+        
+    }
+
+    //
+
+
+
+   </script>
+    
+</body>
+</html>

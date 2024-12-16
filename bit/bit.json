@@ -1,0 +1,27 @@
+[
+    {
+        "symbol": "BTC",
+        "price": 50000,
+        "change": 5
+    },
+    {
+        "symbol": "ETH",
+        "price": 4000,
+        "change": -3
+    },
+    {
+        "symbol": "ADA",
+        "price": 1.2,
+        "change": 10
+    },
+    {
+        "symbol": "SOL",
+        "price": 150,
+        "change": -2
+    },
+    {
+        "symbol": "DOGE",
+        "price": 0.3,
+        "change": 20
+    }
+]

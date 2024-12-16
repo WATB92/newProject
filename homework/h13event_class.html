@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document와 event와 class연습</title>
+    <!-- 외부스타일 링크 위치 -->
+    <style>
+        /* 내부스타일 
+            스타일을 클래스로 변수처럼 사용하는 이유
+            1. 재사용
+            2. 적용 우선 순위로 요소에 직접 스타일을 주는 것 보다 낮기 때문에 선택 사항이 더 생긴다.
+            3. classList(add,remove,relace,toggle,contains) 로 스타일을 동적으로 적용하기가 좋다.
+        */
+        .blue{
+            color: blue;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>document와 event와 class연습</h1>
+    <div>
+        <h2>버튼을 누르면 아래의 li의 class를 모두 blue를 추가하세요 (class,querySelector)
+            <button id="switchBlueBtn" type="button">배열을 모두 파란색으로</button>
+        </h2>
+        <ul id="blueUl">
+            <li>01.버튼 선택자 찾기</li>
+            <li>02.#blueUl>li 찾기</li>
+            <li>03.버튼 onclick 재정의하기(onclick에 정의된 함수를 내가 정의한 함수로 바꾼다.)</li>
+            <li>04.버튼 onclick 재정의하면서 li반복문 작성하기</li>
+                <ul>
+                    <li>01</li>
+                    <li>02</li>
+                    <li>03</li>
+                </ul>
+            <li class="a">05.li 반복문에서 li에 class blue 추가하기</li>
+        </ul>
+
+    </div>
+    <div>
+        <h2></h2>
+    </div>
+    <script>
+        const switchBlueBtn=document.querySelector("#switchBlueBtn")
+        const blueUlLis=document.querySelectorAll("#blueUl>li")
+        switchBlueBtn.onclick=function(){
+            blueUlLis.forEach((li)=>{
+                // li.style.color="blue"
+                // li.style.textDecoration="dashed"
+                // li.style.fontsize="small"
+                //li.className+=" blue" //다른 클래스는 지운다.
+                li.classList.toggle("blue")
+
+            })
+        }
+        
+        
+    </script>
+</body>
+</html>

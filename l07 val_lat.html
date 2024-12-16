@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 var과 let</title>
+</head>
+<body>
+    <h1>변수에 대해서 알아보자</h1>
+    <script>
+        //let a : 변수를 생성
+        //변수를 사용하는 이유?? : 재사용
+        let a=10;
+        let b=20;
+        //10, 20, 30 ,33  값 정수 integer
+        //13, 14, 33, 33 값 실수 fleat
+
+        //let a=20; //한번 만든 변수를 다시 만들 수 없다.(같은 이름의 변수를 생성할 수 없다.)
+        a=22;//a 변수에 22 데이터를 새엉해서 참조 시킨다.
+
+        //스코프 지역(영역) : 구역을 지정한다.
+        //최상위 보무 영역 (globalThis)
+
+        {//a의 자식구역
+            let a=1000;
+            console.log(a,b,window.a); //window 브라우저 객체(최상위에 정의되면 무조건 window)
+            
+            
+        
+        }
+        {//형제 구역(형제간의 간섭은 금지)
+            console.log(a,b);
+            
+
+
+        }
+
+        //var: 아주아주 오래된 변수로 시스템 적으론 사용 되지만 개발자는 사용하지 않는다.
+        var x=55;
+        var y=66;
+
+        x=99;
+        y=88;
+
+        var x=100;//문제1. 동일한 이름의 변수를 계속 선언 할 수 있다.(개발자는 문제로 생각함)
+        console.log(x,y);
+        {
+            var x=999;
+
+            window.x=8888; //var 변수는  사실 window에 필드를 정의하는 명령이다.
+            console.log(x,y,window.x);// 999 88
+            
+        }
+        {
+            //문제 2. scope를 무시한다. (hoisting : 끌어 당겨서 사용한다.)
+            console.log(x,y);// 100 88
+        }
+        
+    </script>
+
+    <h2>변수를 사용하는 이유</h2>
+
+    <ol>
+        
+            <li>데이터를 재사용 하기위해서</li>
+            <li>메모리 절약이 가능 (변수가 참조하지 않는 데이터는 생성 즉시 바로 삭제되기 때문)</li>
+        
+    </ol>
+
+    <h2>표기법과 변수 표기법</h2>
+    <ul>
+        <li>낙타 표기법 : nameName 문자와 문자 사이 결합을 대문자로 하는 방법 (추천1*****)</li>
+        <li>소문자 스네이크 표기법 : name_name 문자와 문자 사이를 _ 언더 스코어로 결합 (추천2)</li>
+        <li>파스칼 규칙 : NameName 낙타 표기법과 같은데 시작이 대문자 (비추, 타입, 대명사)</li>
+        <li>대문자 스네이크 표기법 :NAME_NAME (비추,상수)</li>
+    </ul>
+
+    <h2>사용하면 안되는 이름</h2>
+    <ul>
+        <li>예약어는 사용하면 안된다. : a+b , a-b , if , for , let ,var....</li>
+        <li>미리 선언된 객체 :window, console, document....</li>
+        <li>수로 시작하면 안된다. : 1name, 01name</li>
+        <li>알아보기 힘든 이름은 안된다 : x, y 보다는 명확한 이름이 없는 것이 좋다 .</li>
+    </ul>
+    <h2>var과 let의 차이점</h2>
+    <ul>
+        <li>변수를 생성하는 명령어 var은 전체 영역에 선언되고 let은 영역을 구분한다.</li>
+        <li>var a=10; == window.a=10; (window : 브라우저 객체 , 전체 영역)</li>
+        <li>var로 선언한 변수는 전체 영역에서 사용되기 때문에 hoisting(끌어 당김)이 일어난다.</li>
+        <li>var은 동일한 이름의 변수를 여러번 선언 가능하다.</li>
+        <li>let은 같은 영역에서 한번만 변수 선언이 되고 선언된 변수는 해당 영역에서만 유효하다.</li>
+    </ul>
+</body>
+</html>

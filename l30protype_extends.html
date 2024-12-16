@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로토타입 상속</title>
+</head>
+<body>
+    <h1>프로토타입 상속</h1>
+    <script>
+        class A{
+            constructor(a,b){
+                this.a=a;
+                this.b=b;
+            }
+        }
+        class B extends A{
+            constructor(a,b,c){
+                //this.a=20;
+                super(a,b); // B를 객체를 만들때 A생성자도 거들겠다.
+                this.c=c;// 부모 생성자가 무조건 일을 먼저해야한다. (규칙)
+                //생성=>부모 << 자식 : 부모의 필드 보다 자식 필드가 우선 순위를 갖는다.
+                this.a=20;// super() 보다 아래에 작성해야 부모의 필드 a를 덮기 때문(Override )
+            }
+        }
+
+        function X(a,b){
+            this.a=a;
+            this.b=b;
+        }
+
+        function Y (a,b,c){
+            
+            this.__proto__.__proto__ = X.prototype; // 상속 classㅌ extends Y
+           
+  
+            X.call(this,a,b)//함수에서 생성자 호출!!!
+          
+            this.c=c;
+        }
+        console.log(new B(100,200,300));
+        console.log(Y);
+        console.log(new Y().__proto__);
+        console.log(new Y().__proto__.__proto__);
+        
+
+        console.log(new Y(10,20,30));
+        
+    </script>
+</body>
+</html>

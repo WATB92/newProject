@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로토타입언어의 특징</title>
+</head>
+<body>
+    <h1 id="title">프로토타입언어의 특징에 대해 알아봅시다.</h1>
+    <ul>
+        <li>함수나 클래스를 정의하면 자바스크립트 엔진이 프로토타입 객체로 생성한다.</li>
+        <ul>
+            <li>function A{} => A.prototype</li>
+            <li>class B{} => B.prototype  
+                (함수와 같은데 자바스크립트를 객체 지향 문법처럼 보이기하기 위한 문법적 설탕이다. syntatic sugar) </li>
+            <li>function add(){} => add.prototype</li>
+        </ul>
+        <li>프로토타입에 해당 함수나 클래스의 생성자를 갖는다.:객체는 프로토타입으로 생성한다.</li>
+            <ul>
+                <li>constructor : 객체를 생성할 때 꼭 호출되는 것으로 필드를 초기화 한다.</li>
+                <li>프로토타입 : 객체의 원형</li>
+            </ul>
+        
+        </li>
+        <li>함수형언어의 특징 : 매개변수로 함수를 사용할 수 있으면 필드의 함수를 초기화 할 수 있다.</li>
+    </ul>
+</ul>
+
+    <script>
+        //모든 태그는 이벤트 함수를 재정의 할 수 있다.
+        title.onclick=function(e){
+            title.style.color="red";
+        }
+
+        function add(){}
+        function A (a,b,c,d) {
+            this.a=a;
+            this.b=b;
+            this.c=c;
+            this.d=d;
+            this.onclick=function(){}
+        }
+        const a = new A(10,20,30,function(){console.log("안녕!");
+        }); // 매개변수로 필드를 함수로 초기화
+        a.d();
+        a.onclick=function(){
+            console.log("onclick 필드를 함수로 재정의 안녕!"); // 필드에 바로 대입
+            
+        }
+        a.onclick();
+
+        //setInterval(function(){},1000) 매개 변수로 받은 함수를 필드로 재정의
+
+
+        class B{
+            constructor(a,b){
+            this.a=a;
+            this.b=b;
+            this.add=function(){
+                return this.a+this.b;
+            }
+            }
+            mult(){
+                return this.a*this.b;
+            }
+        }
+
+        console.log(add.prototype,A.prototype,B.prototype);
+        
+        //this로 함수를 정의하면 모든 객체가 함수를 갖는다.
+        const b=new B(88.8 ,99,9)
+        const b2=new B(88.8 ,99,9)
+        const b3=new B(88.8 ,99,9)
+
+        //함수를 재정의 할 수 있다.
+        b.add=function(){
+            return this.a*this.b
+        }
+        console.log(b);
+        
+        b.mult=function(){
+            console.log("망해라 에러!");
+            
+        }
+        console.log(b);
+        
+        console.log(b.add());
+        //console.log(B.prototype);
+        //console.log(b.prototype);
+        
+        console.log(b.__porto__.mult()); 
+        //프로토타입 객체는 미완성 본이라 필드가 없다. 
+        // =>return this.a*this.b; undefined*undefined => NaN
+        //객체의 프로토타입은 존재하지 않는다. 타입의 프로토타입만 존재한다 .(함수와 클래스를 명시해야 프로토타입이 생성됨)
+        // __proto__ : 객체 입장에서는 프로토타입 , 프로토타입 입장에서는 부모 프로토타입
+        console.log(b.mult());
+
+    </script>
+</body>
+</html>

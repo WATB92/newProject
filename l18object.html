@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object의 리터럴 표기법과 참조하기</title>
+</head>
+<body>
+    <h1>Object의 리터럴 표기법(JSON)과 참조하기</h1>
+    <p>자바 스크립트는 객체를 리터럴하게 표기하는 방법을 제공하고 있고
+        그 방법이 객체 명세서와 거의 동일하다.
+    </p>
+
+    <h2>Object의 리터럴 표기법</h2>
+    <ul>
+        <li>new Object() : "{}"</li>
+        <li>new Object.a="재덕" : {a : "재덕"}</li>
+        <li>new Object.["a"]="재덕" : {"a" : "재덕"}</li>
+        <li>new Object.[100]="재덕" : {100 : "재덕"}</li>
+        <li>new Object.add=function(a,b){} : {add (a,b){}}</li>
+        <li>new Object.add=function(a,b){} : {add: function(a,b){}}</li>
+        <li>{100:1,40:2,30:3} 선언하면 => {30:3 ,40:2 ,100:1}
+            (숫자 필드명만 정렬한다.)
+        </li>
+
+        <h2>동등 비교연산이 기본형 데이터와 자료형을 비교할 때 생기는 일</h2>
+        <ul>
+            <li>자료형에서 [Symbol.toPrimitive] 함수가 존재하면 실행해서 변환 받는 값과
+                기본형 데이터를 비교한다. : new Number(55)==55 =>
+                new Number(55)["Symbol.toPrimitive"] = 55</li>
+            <li>자료형에 [Symbol.toPrimitive] 가 없으면 무조건 false다.</li>
+        </ul>
+    </ul>
+    <script>
+        let objTest={100:1,40:2,30:3,60:50};
+        console.log(objTest);
+        
+        //==(값을 비교하는 연산) 동등 비교 연산은 자료형의 PrimitiveValue 기본형과 비교
+        console.log(new Number(55),55, new Number(55)==55);
+        console.log(new String("안녕"),"안녕",new String("안녕")=="안녕");
+        console.log(new Boolean(1==1),1==1);
+
+
+        class A{
+            constructor(){
+                this.a=10;
+                this.b=20;
+                this.c=30;
+                //this.100=40; x
+                //this.1a=10; x
+                this[100]=40; //".","[수 가능]" 하위 필드 접근자 
+                //this.PrimitiveValue=40;
+                //[] : Array가 index를 참조하는 접근자 (다른 언어에서는 배열에서만 사용)
+                //언어가 유연 할 수록(시적이다)... 사람=> 하이레벨 언어
+
+            }
+        }
+        console.log(new A());//new A()==40);// {a: 10, b: 20, c: 30} :객체의 리터럴한 표기법
+        //리터럴 : 눈에 보이는 그대로 표기
+
+        let objA= {a:10,"b":20,'c':30, 100:40, 20: 50}; //객체의 리터럴한 선언법
+        console.log(objA); //{a: 10, b: 20, c: 30} (object)
+        //*** 다른 프로그래밍에서 모든 객체의 필드는 필드명으로 순서를 정하지 않는다.(js x)
+        //*** 다른 프로그래밍에서 모든 객체의 필드는 숫자로된 필드명을 사용할 수 없다 .(js x)
+        //=>일반적으로 객체의 필드명은 순서가 없고 숫자를 정의할 수 없다. 오직 js만 가능하다.
+
+
+
+
+        let objB= new Object();
+        objB.a=10;
+        objB["b"]=20;
+        //objB[c]=30; // 이건 불가능
+        let key="c";
+        objB[key]=30;
+        //objB.100=40;
+        objB[100]=40;
+
+
+
+
+        console.log(objB); //{a: 10, b: 20, c: 30, 100:40}
+
+
+        
+        
+        //100의 기본값을 갖는 자료형 (랩퍼 클래스인 척)
+        let PrimiObj={
+            PrimitiveValue : 100,
+            [Symbol.toPrimitive](hint){
+                return 100;
+            }
+        } // new Number (100) 같은척 
+        console.log(PrimiObj);
+        
+        console.log(PrimiObj==100);
+        console.log(new Number(100));
+        
+        
+        
+
+
+
+
+    </script>
+</body>
+</html>

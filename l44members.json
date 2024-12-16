@@ -1,0 +1,14 @@
+[
+    {
+        "name": "경민 ",
+        "id": "deveckm",
+        "age": 38,
+        "married": true
+    },
+    {
+        "name": "두더지 ",
+        "id": "잡기",
+        "age": 20,
+        "married": true
+    }
+]

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드개체 생성과 일정관리 어플</title>
+</head>
+<body>
+    <h1>노드개체 생성과 일정관리 어플</h1>
+    <div id="cont"></div>
+    <h2>innerText,innerHTML write()</h2>
+    <ul>
+        <li>innerText : 특정 요소에 문자열로 작성된 필드를 텍스트 노드로 변경해서 추가</li>
+        <li>innerHTML : 특정 요소에 문자열로 작성된 필드를 분석해서
+            요소개체와 텍스트노드로 변경해서 추가</li>
+        <li>write : write를 실행한 위치에서 문자열로 작성된 필드를 분석해서
+            요소개체와 텍스트노드로 변경해서 추가</li>
+        <li>
+            innerHTML : 은 연산속도가 느리다. 개체를 직접 만들어서 추가하는 것 보다 제한이 많다.
+        </li>
+        <li></li>
+
+    </ul>
+    <h2>노드 개체를 직접 만들어서 추가하기</h2>
+    <ul>
+        <li>document.creatElement("tag이름"); return 노드개체</li>
+        <li>document.creatTextNode("문자열"); return 텍스트개체</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <h2>노드개체를 기준으로 특정 위치에 다른 노드를 추가하기</h2>
+    <ul>
+        <li>node.append(insertnode) : node 자식의 맨 뒤에 insertNode 추가</li>
+        <li>node.prepend(insertnode) : node 자식의 맨 뒤에 insertNode 추가</li>
+        <li>node.before(insertnode) : node의 형제로 바로 앞에 inserNode 추가 </li>
+        <li>node.after(insertnode) : node의 형제로 바로 뒤에 inserNode 추가</li>
+        <li>node.replaceWith(insertnode) : node 전부를 insertNode 개체로 전환</li>
+
+
+        <li>node.innerHTML="문자열html" : node 자식 전부 문자열html을 개체로 만들어서 전환</li>
+        <li>document.write("문자열html") : 
+            write 함수가 실행된 위치에 문자열html을 개체로 만들어서 추가
+        </li>
+        <li>
+            insertAdjacentHTML("beforebegin","문자열html") : ==before()
+        </li>
+        <li>
+            insertAdjacentHTML("afterend","문자열html") : ==afrer()
+        </li>
+        <li>
+            insertAdjacentHTML("afterbegin","문자열html") : ==prepend()
+        </li>
+        <li>
+            insertAdjacentHTML("beforeend","문자열html") : ==append()
+        </li>
+
+    </ul>
+    <script>
+        let i=document.createElement("i");
+        i.innerText="나는 추가 되는 노드야~!"; 
+        //innerText 는 innerHTML 만큼 렌더링에 무리를 주진 않는다.
+    </script>
+    <h2>실습</h2>
+    <p>
+        <button onclick="container.before(i);">before()테스트</button>
+        <button onclick="container.after(i);">after()테스트</button>
+        <button onclick="container.prepend(i);">prepend()테스트</button>
+        <button onclick="container.append(i);">append()테스트</button>
+        <button onclick="container.replaceWith(i);">replaceWith()테스트</button>
+
+        <button onclick="container.innerHTML=`<i>나야~나~!</i>`;">innerHTML</button>
+
+
+    </p>
+    <hr>
+    <div id="container" style="border: 1px solid;">
+        <strong>
+            나는상자야!!
+        </strong>
+    </div>
+    <hr>
+    
+    
+    <pre></pre>
+
+
+    <script>
+        const cont=document.getElementById("cont");
+        // cont.innerText="<i>텍스트노드</i>";
+        // cont.innerHTML="<i>텍스트노드</i>";
+        // document.write("<h2>하이요~</h2>");
+        // let strong=document.createElement("strong");
+        // let txt=document.createTextNode("곧 지구종말");
+        // strong.append(txt);
+        // console.log(strong);
+        // cont.prepend(strong);
+
+        cont.innerText="<i>텍스트노드</i>"
+        cont.innerHTML="<i>요소가 포함된 노드</i>" +cont.innerHTML
+        document.write("<h4>우하하</h4>")
+        
+        //innerHtml 의 문제점 선택한 요소의 자식을 모두 다른것으로 바꾼다.
+
+        const strong=document.createElement("strong")
+        let id=document.createAttribute("id")
+        id.value="hello";
+
+
+        let txtNode=document.createTextNode("안녕~")
+        console.log(strong,id,txtNode);
+        //strong 에 text 노드를 추가하려면 나를 기준으로 어느 위치에 추가할건지 명시 해야한다.
+        strong.append(txtNode);
+        console.log(strong);
+        strong.setAttributeNode(id);
+        strong.setAttribute("style","color:red")// 문자열로 개체 생성
+        
+        
+
+    </script>
+
+    <h2>일정 관리 어플</h2>
+    <hr>
+    <ul id="appUl">
+
+    </ul>
+    <hr>
+    <form name="appForm" action="#">
+        <p>
+            <label>
+                시간
+                <input type="time" name="time">
+            </label>
+            <label>
+                일정
+                <input type="text" name="content" value="양치하기">
+
+            </label>
+            <button type="submit">등록</button>
+        </p>
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <script>
+        const appUl=document.getElementById("appUl")
+        const appForm=document.forms.appForm;
+
+        //문자열키를 사용하면 정렬이 안된다.
+        //const appObj={"13:3":"운전","07:05":"양치", "07:50":"양치"}
+        //일정앱에서 일정을 시간 순서대로 출력하기 위해서 time을 수로 바꿔서 저장
+        const appObj={1120:"퇴근",800:"운전", 450:"출근",1320:"취침"}
+        //3:19 => 3*60+19 => 199
+        //7:30 => 7*60+30 => 450 => Number.floor(450/60)  450%60= 7시 30분
+        //13:20 => 800
+        //18:40
+        //23:00
+        const srtTime=function(time){//450
+            let h=Math.floor(time/60); //7.xxxx =>7
+            let m=time%60;
+            //"7시30분"
+            return h+"시"+m+"분"
+        }
+        const numTime=function(srtTime){
+            //"07:30".split(":"); => ["07","30"]
+            let arr=(srtTime.split(":"));
+            return Number(arr[0])*60+Number(arr[1]);
+
+            // return Number("07")*60+Number("30");
+        }
+
+
+        const printAppObj=function(){
+            appUl.innerHTML="";//자식 노드를 모드 삭제하겠다.
+            //Object key는 Set type으로 배열과 유사해서 Iterator가 존재한다.
+            //Set 자료는 중복을 허용하지 않는다.
+            for(let key in appObj){//1120,800,450,1320]Set
+                //console.log(key,appObj[key]); // key가 문자열이라 대괄호로 참조
+                let li=document.createElement("li");
+                let b=document.createElement("b");
+                let span=document.createElement("span");
+                b.innerText=srtTime(key);
+                span.innerText=appObj[key];
+                li.append(b);
+                li.append(span);
+                appUl.append(li);
+                
+            }
+        }
+        printAppObj();
+
+
+
+        
+        appForm.onsubmit=function(e){
+            e.preventDefault();
+            let time=this.time.value; //"7:30"
+            let content=this.content.value;
+            time=numTime(time); //450
+            if(time in appObj){
+                //일정이 등록되어 있으면 물어보고 등록
+                let result=confirm("이미 등록된 일정이 있습니다. 바꾸시겠습니까?");
+                if(result){
+                    appObj[time]=content;
+                }
+            }else{
+                appObj[time]=content;
+            }
+            
+            
+            //appObj[time]=content;
+            printAppObj();
+            
+            // console.log(time,content);
+            // let li=document.createElement("li");
+            // let b=document.createElement("b");
+            // let span=document.createElement("span");
+            // b.innerText=time +" : ";
+            // span.innerText=content
+            // li.append(b);
+            // li.append(span);
+            
+            // appUl.prepend(li);
+
+            
+            
+        }
+
+
+        
+    </script>
+</body>
+</html>

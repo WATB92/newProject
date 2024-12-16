@@ -1,0 +1,155 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; 
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+#container {
+    text-align: center;
+}
+
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+.header button:hover {
+    background-color: #0056b3;
+}
+
+#monthName {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 15px;
+}
+
+
+.calendar {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px; 
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar th,
+.calendar td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.calendar th {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.calendar th:first-child {
+    background-color: red;
+    color: white;
+}
+
+
+.calendar td:nth-child(1) {
+    color: red;
+}
+
+.calendar td:nth-child(7) {
+    color: #007bff;
+}
+
+
+.calendar td {
+    cursor: pointer;
+}
+
+.calendar td:hover {
+    background-color: #f1f1f1;
+}
+
+.calendar td.selected {
+    background-color: #ffeb3b;
+}
+
+
+#alarm-section {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#alarm-section h2 {
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+#alarm-section label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#alarm-section input {
+    margin-bottom: 10px;
+}
+
+#alarm-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#alarm-list li {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#alarm-list button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#alarm-list button:hover {
+    background-color: #c82333;
+}

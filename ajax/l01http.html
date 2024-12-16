@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>http 통신과 XMLHTTPRequest</title>
+</head>
+<body>
+    <h1>http 통신과 XMLHTTPRequest</h1>
+    <ul>
+        <li>http(HyperText Transper Protocal) 통신: 
+            웹에서 html 을 전송하는 규약</li>
+        <li>웹 or 웹서비스: 
+            브라우저 이용해서 인터넷에 접속하고 서버에서 정보를 습득하는 서비스로
+            이때 사용되는 통신 규약이 http다.
+        </li>
+        <li>인터넷 : 광케이블이나 인공위성으로 설치된 망으로 정보를 주고 받는 것</li>
+        <li>동기식 통신 : 
+            브라우저가 참조한 리소스(html,xml,json,img...)1개를 렌더링(출력) 하는 것
+            (1개를 참조하면 1개를 렌더링=>화면이 리소스와 동기됨)
+        </li>
+        <li>비동기식 통신 :
+            브라우저가 참조한 리소스에서 다른 리소스를 계속 참조하는 것    
+            (1개를 참조하면 n개를 렌더링=>화면에 리소스가 바뀐다.)
+        </li>
+        <li>렌더링 후 리소스를 바꿀 수 있는 방법은 js 뿐이다.</li>
+    </ul>
+    <h2>동기식과 비동식(AJAX)통신 비교</h2>
+    <ul>
+        <li>
+            <a href="../l44members.xml">동기식(기본값)</a>
+        </li>
+        <li>
+            <button type="button" id="loadMemBtn">멤버 xml 불러오기</button>
+            <div id="memCont"></div>
+        </li>
+        <li>
+            <button>멤버 json 불러와서 table로 출력!</button>
+        </li>
+    </ul>
+    <script>
+        const loadMemBtn=document.getElementById("loadMemBtn");
+        const memCont=document.getElementById("memCont");
+
+        loadMemBtn.onclick=(e)=>{
+            const req=new XMLHttpRequest();
+            //get : 리소스를 요청하는 모든 행위
+            req.open("GET","../l44members.xml");
+            req.onload=function(){
+                memCont.innerText=req.responseText;
+            }
+            
+            req.send();
+            //통신이 완료될때까지 기다렸다가 log가 출력되면
+            //위의 스레드와 아래 스레드가 같거나 다르면 동기화된 상태입니다.
+            console.log(req.responseText);//l44members.xml
+
+
+
+            //setTimeout() 기다렸다가 실행
+            // setTimeout(()=>{
+            //     memCont.innerText=req.responseText;
+            // },10)
+        }
+
+    </script>
+</body>
+</html>

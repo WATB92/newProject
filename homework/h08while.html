@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>while 반복문 연습</title>
+</head>
+<body>
+    <h1>while 반복문 연습</h1>
+    <script>    
+        let i=0; // 선언문의 인덱스
+        //1. 콘솔에 다음과 같이 while 반복문으로 출력하세요!
+        /*
+        안녕!0
+        안녕!1
+        안녕!2
+        안녕!3
+        안녕!4
+        */
+       let sum=0;
+
+       
+
+    while(i<5){
+        console.log("안녕!"+i);
+        i++; 
+
+        }
+
+
+       i=0; //인덱스 초기화
+       //while로 1부터 100까지의 합을 구하세요.
+        
+       /*while (i<101) {
+            sum+= i;
+            i++;
+        }
+        console.log(sum);*/
+
+        while (i<101) {
+            sum+=(i++);
+        }
+        console.log(sum);
+        
+
+
+
+       //다음 수를 반복문과 "%"를 이용하세요 2진수로 만드세요
+       let binaryStr="";
+       num= 14;
+        
+       binaryStr+=num%2;
+       num-=num%2
+
+
+        
+
+    </script>
+</body>
+</html>

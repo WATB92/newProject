@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오류를 예외처리 해보자</title>
+</head>
+<body>
+    <h1>오류를 예외처리 해보자(에러핸들링)</h1>
+    <p>js에서 오류가 발생하면 실행이 멈추기 때문에 if나 try catch로 에러핸들링을 해야합니다.</p>
+    <p>if로 에러핸들링을 할 수 없는 경우가 존재하기 때문에 try catch로 에러핸들링을 주로 사용한다.</p>
+    <h2>try{}catch(e){log파일로 저장하라!!} : 예외처리</h2>
+    <p>오류가 발생할 수도 있는 영역을 try 블럭에 지정하면 오류가 발생한 지점에서 실행을 멈추고
+        catch가 실행된다. 이때 오류내역을 알고 싶다면 매개변수 e를 사용하면 되고 보통 log 파일로 저장했다가
+        유지보수에 사용된다.
+    </p>
+    <script>
+        try{
+            if(안녕)console.log(안녕);
+        }catch(e){
+            console.log(e);
+        }
+        console.log(1+1);
+            
+        let json=`{key:13}`; //data 통신으로 받아온 데이터가 문제가 있는 상황 
+        try{
+            let obj=JSON.parse(json);
+            console.log(obj);
+        }catch(e){
+            console.log(e);
+        }
+        //오류가 발생해야 하는데 상태로 표시하는 것 
+        //상태: null,undefined,NaN(오류인 상태)
+
+        let str="22";
+        str="이십이";
+        console.log(Number(str)); //"22"를 number로 parse 중
+        //NaN :웹상에서 문자열을 수로 파싱하는 일이 많은데 모든 코드를 예외처리하면 힘들기 때문에 
+
+
+        //오류를 강제로 발생시키는 방법! throw new Error() =>
+        // 예외 위임(예외를 던져서 다른곳에서 처리하도록 한다.)
+
+        //throw new Error();
+        throw new SyntaxError();//JSON 파싱오류         
+
+    </script>
+</body>
+</html>

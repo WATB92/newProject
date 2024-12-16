@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xmlhttprequest 실습</title>
+</head>
+<body>
+    <h1>xmlhttprequest 실습</h1>
+    <h2>웹과 http</h2>
+    <ul>
+        <li>인터넷이란 :통신을 하기 위해 컴퓨터를 물리적으로 연결하고 있는 망</li>
+        <li>웹 (www 웹서비스란) : 브라우저라는 소프트 웨어를 이용해서 인터넷을 통해 정보(html)를 주고받는 것</li>
+        <li>http란 : 웹에서 html 을 통신하기 위해 만들어진 통신규약</li>
+        <li>서버와 클라이언트란 : 
+            서버는 리소스를 전달하는 곳으로(서비스 제공) 클라이언트는 리소스를 받는 곳 입니다.(서비스를 받는다)</li>
+        <li>리소스Resource란 : 주소가 존재하는 자료로 공유가능 합니다.</li>
+        <li>url 이란 : 웹상의 리소스의 주소가 url입니다.
+            <ul>
+                <li>ip/port : ip는 서버 컴퓨터의 인터넷 주소,
+                    port 컴퓨터에서 실행중인 서버프로그램의 고유번호로 os가 부여합니다.</li>
+                <li>domain : 서버 주소인 ip와 port를 문자열로 맵핑하는 서비스</li>
+                <li>path : 서버에서 리소스의 위치</li>
+                <li>querystring : 동적 리소스가 동작할 때 필요한 파라미터(양식에서 제출)</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>동기식과 비동기식 통신</h2>
+    <ul>
+        <li>동기식 통신이란 : 요청해서 응답받은 리소스(url의 리소스)와 
+            렌더링(출력)하는 리소스가 동일할때 동기식(요청하는 리소스와 출력하는 리소스가 1:1)</li>
+        <li>비동기(AJAX)식 통신이란 :
+            최초로 요청한 리소스가 자바스크립트를 이용해 다른 리소스를 요청했을때 
+            (주소창의 리소스와 렌더링한 리소스가 1:1 대응되지 않을 때)
+        </li>
+        <li>xmlhttprequest 객체가 하는 일은 :
+             자바스크립트를 이용해 다른 리소스를 요청한다.(AJAX 통신)</li>
+        <li>xmlhttprequest가 실행되면 완료 시점이 비동기 되는 이유는 :
+            스레드가 생성돼서 통신하기 때문입니다.
+        </li>
+        <li>xmlhttprequest가 실행이 완료된 시점에 동기화 하는 방법은 :
+            onload를 재정의하거나 onreadystatechage의 완료시점을 재정의하면됩니다.
+        </li>
+    </ul>
+    <h2>실습</h2>
+    <p>testBtn 클릭하면 testCont 에 ../l44members.json 을 불러와서 출력하세요!</p>
+    <style>#ex{display: none;}</style>
+    <ul>
+        <li><button id="testBtn">loadMemJson</button></li>
+        <li id="testCont">
+            <p id="ex">
+                이름 : <b class="name"></b>/
+                아이디 : <b class="id"></b>/
+                나이 : <b class="age"></b>/
+                결혼 여부 : <b class="married"></b>
+            </p>
+        </li>
+    </ul>
+    <script>
+        const testBtn=document.getElementById("testBtn");
+        const testCont=document.getElementById("testCont");
+        const ex=document.getElementById("ex");
+        testBtn.onclick=(e)=>{
+            const req=new XMLHttpRequest();
+            req.open("GET","../l44members.json");
+            req.onreadystatechange=(e)=>{
+                if(req.readyState===4 && req.status===200){
+                    let mems=JSON.parse(req.responseText);
+                    mems.forEach((mem)=>{
+                        let p=ex.cloneNode(true);
+                        p.removeAttribute("id");
+                        for(let key in mem){
+                            let b=p.querySelector(`.${key}`);
+                            let t=document.createTextNode(mem[key]);
+                            b.append(t);
+                        }
+                        testCont.append(p);
+                    });
+                }
+            }
+            req.send();
+        }
+    </script>
+</body>
+</html>

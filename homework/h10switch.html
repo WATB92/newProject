@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch 연습</title>
+</head>
+<body>
+    <h1>switch 연습</h1>
+    <ul>
+        <li>switch 구문으로 let a=11; 의 수가 짝수인지 홀수인지 콘솔에 출력하세요.</li>
+        <li>setGrade를 switch로 작성하는데 "+"를 제외하세요.</li>
+    </ul>
+    <script>
+        let a=11;
+        let str=""
+        switch(a%2){
+            case 0: str="짝수 입니다."; break; 
+            //case 1: str="홀수 입니다."; break; 
+            default : str="홀수 입니다.";
+        }
+        function setGrade(score){
+            score=Math.floor(score/10) //8.8 =>8
+            let grade="";
+            switch(score){
+                case 10 : grade="A"; break;
+                case 9 : grade="A"; break;
+                case 8 : grade="B"; break;
+                case 7 : grade="C"; break;
+                case 6 : grade="D"; break;
+                //case 5,4,3,2,1,0 : grade="F"; break;
+                default : grade="F";
+            } 
+            return grade;
+        }
+        console.log(setGrade(88));//B
+        console.log(setGrade(55))
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드개체 생성과 일정관리 어플</title>
+    <style>
+        #appUl>li{
+            display: flex;
+            justify-content: space-between;
+        }
+        .alarm-active {
+            background-color: #ffeb3b;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1> 일정관리 어플</h1> 
+    <hr>
+    <ul id="appUl">
+        <li id="appLiEx">
+            <div>
+                <b class="time"></b>
+                &nbsp;
+                <span class="content"></span>
+            </div>
+            <div>
+                <button class="alarmBtn">⏰</button>
+                <button class="delBtn">x</button>
+            </div>
+        </li>
+    </ul>
+    <hr>
+    <form name="appForm" action="#">
+        <p>
+            <label>
+                시간
+                <input type="time" name="time">
+            </label>
+            <label>
+                일정
+                <input type="text" name="content" value="양치하기">
+            </label>
+            <button type="submit">등록</button>
+        </p>
+    </form>
+    <p>
+        <button id="printScheduleBtn">일정 출력</button>
+    </p>
+    <script>
+        const printScheduleBtn=document.getElementById("printScheduleBtn")
+        const appUl=document.getElementById("appUl")
+        const appLiEx=document.getElementById("appLiEx")
+        const appForm=document.forms["appForm"]
+        const schedule={
+            400 : "일어나기",
+            460 : "출근하기",
+            560 : "수업시작",
+            800 : "점심먹기",
+            1100 : "퇴근하기",
+            1180 : "저녁식사",
+            1320 : "잠자기"
+        }
+        
+        // 알람 상태를 저장하는 객체
+        const alarms = {};
+        
+        const strTime=(key)=>{
+            return `${Math.floor(key/60)} 시 ${key%60}분`;
+        }
+        
+        const minTime=(time)=>{ //"17:40"
+            let arr=time.split(":"); //["17","40"]
+            let hour=Number(arr[0]); //17
+            let min=Number(arr[1]); //40
+            return hour*60+min;  //1760+40
+        }
+
+        // 알람 체크 함수
+        const checkAlarms = () => {
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            for (let key in alarms) {
+                if (alarms[key] && Number(key) === currentMinutes) {
+                    alert(`알람: ${schedule[key]} 시간입니다!`);
+                    const li = document.querySelector(`[data-time="${key}"]`);
+                    if (li) {
+                        li.classList.remove('alarm-active');
+                    }
+                    alarms[key] = false;
+                }
+            }
+        }
+
+        // 1분마다 알람 체크
+        setInterval(checkAlarms, 60000);
+        
+        const printSchedule=()=>{
+            appUl.innerHTML="";
+            for(let key in schedule){
+                let li=appLiEx.cloneNode(true);
+                li.removeAttribute("id");
+                li.setAttribute('data-time', key);
+                let time=document.createTextNode(strTime(key));
+                let contents=document.createTextNode(schedule[key]);
+                let b=li.querySelector(".time");
+                let span=li.querySelector(".content");
+                let delBtn=li.querySelector(".delBtn");
+                let alarmBtn=li.querySelector(".alarmBtn");
+                
+                b.append(time);
+                span.append(contents);
+                appUl.prepend(li);
+                
+                // 알람 버튼 이벤트
+                alarmBtn.onclick = () => {
+                    if (alarms[key]) {
+                        alarms[key] = false;
+                        li.classList.remove('alarm-active');
+                        alert('알람이 취소되었습니다.');
+                    } else {
+                        alarms[key] = true;
+                        li.classList.add('alarm-active');
+                        alert('알람이 설정되었습니다.');
+                    }
+                }
+                
+                delBtn.onclick=(e)=>{
+                    delete schedule[key];
+                    delete alarms[key];
+                    printSchedule();
+                }
+            }
+        }
+        
+        printScheduleBtn.onclick=printSchedule;
+        
+        appFormSubmitHandler=(e)=>{
+            e.preventDefault();
+            let time=minTime(appForm.time.value);
+            let content=appForm.content.value;
+            if(time in schedule){
+                let result=confirm("등록된 일정을 바꾸시겠습니까?")
+                if(result){
+                    schedule[time]=content;
+                    printSchedule();
+                }
+            }else{
+                schedule[time]=content;
+                printSchedule();
+            }
+        }
+        
+        appForm.onsubmit=appFormSubmitHandler;
+    </script>
+</body>
+</html>

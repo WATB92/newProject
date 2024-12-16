@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스레드간의 동기화와 promise 객체</title>
+</head>
+<body>
+    <h1>스레드간의 동기화와 promise 객체</h1>
+    <script>
+        //스레드를 생성하는 함수 : setInterval(),setTimeout(),XMLHTTPRequest.sed()
+        let a=0;
+        setTimeout(()=>{
+            a=10;
+        },1)
+        console.log(a); 
+        //a 가 0인 이유는 스레드간의 비동기 상태가 발생했기 때문이다.
+
+
+        //서로 다른 스레드간의 상태를 동기화 시키는 방법은 오직 
+        //스레드가 종료되는 시점까지 기다리는 방법 뿐이다.
+        //Promise 객체를 사용하면 스레드의 특정 시점을 동기화(resolve) 할 수 있다.
+        a=0;
+        new Promise((resolve)=>{
+            setTimeout(()=>{
+                a=100;
+                resolve();//이 시점에 다음 코드를 동기화 하겠다.
+
+            },1000)
+        }).then(()=>{
+            console.log(a);
+            
+        });
+        //**promise 객체로 스레드간의 동기화 ! 요즘은 아무도 사용하지 않지만 알고 있어야한다! 
+
+    </script>
+</body>
+</html>

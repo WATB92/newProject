@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object 실습</title>
+</head>
+<body>
+    <h1>object 실습</h1>
+    <script>    
+        //문제 0. 변수 objB가 참조하는 객체를 만드세요. 필드는 a,b,c,100이 있고 모두 수 데이터 입니다.
+        //문제 1. objB 필드 c의 값을 60으로 바꾸세요
+        //문제 2. objB 필드 100의 값을 1 증가 시키세요.
+        //문제 3. 리터럴 표기법으로 name, age, job이 있는 객체를 생성하세요.
+
+
+        // class A{
+        //     constructor(){
+        //         this.a=10;
+        //         this.b=20;
+        //         this.c=30;
+        //         this[100]=40;
+        //     }
+
+        // }
+        // console.log(new A);
+
+        // class Object extends A{}
+        
+        // let objB= new Object(0);
+        // objB.c= 60;
+        // p = objB[100];
+        // objB[100]= p+1;
+
+
+        
+
+        // console.log(objB);
+        // let objA= {a:10,"name":"이재덕",'age':33, "job":"백수",}
+        // console.log(objA);
+        
+
+
+        let objB={a:1, b:2 ,c:3,100:4}
+        objB.c=60;
+        objB["c"]=60;
+        //objB[c]=60; X
+        //++objB.100; X
+        objB[100] += 1;
+        //++objB[100];
+
+        console.log(objB);
+        
+
+        let person={name:"재덕" , age :33, job : "개백수"};
+        let person2={name:"재덕" , age :33, job : "개백수"};
+        let person3={name:"재덕" , age :33, job : "개백수",add:function(a,b){return a+b}};
+        let person4={name:"재덕" , age :33, job : "개백수",add(a,b){return a+b}}; 
+        //함수를 참조 add: f
+        console.log(person3);
+        console.log(person4);
+
+        
+        //name => naming 바꾸면 좋겠다. (야근지옥)
+        //필드를 추가=> 야근지옥
+        //타입을 만들고 객체를 생성 => 정시퇴근
+        class Person{
+            constructor(name,age,job){
+            this.name=name;
+            this.age=age;
+            this.job=job;
+
+            }
+            add(a,b){return a+b;}
+            mult= function(a,b){
+                return a*b;
+            }
+            //function test (){} X
+        }
+
+        let p=new Person("재덕",33,"개백수")
+        let p2=new Person("재덕",33,"백수")
+        let p3=new Person("재덕",33,"식충이")
+        console.log(p,p2,p3);
+        console.log(p.add(10,20),p.mult(5,7));
+        
+
+        
+
+
+
+
+
+
+    </script>
+</body>
+</html>

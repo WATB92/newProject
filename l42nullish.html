@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논리 연산자와 ?? nullish 병합 연산자</title>
+</head>
+<body>
+    <script>
+        //a,b,c,d,e 외부에서 받아온 데이터 (전재) 중에 1개의 데이터가 있으면 출력하라!
+        let a;
+        let b;
+        let c=""; //인삿말
+        let d;
+        let e;
+
+        let say= a || b || c || d || e; 
+        //하나라도 true면 모두 true ==>true가 나오는 즉시 연ㄴ산을 종료한다.
+        console.log(say+"하세요!");
+        
+
+
+
+
+        // if(a){//false "", null,undefined,0
+        //     console.log(a);
+        // }else if(b){
+        //     console.log(b);
+            
+        // }else if(c){
+        //     console.log(c);
+            
+        // }else if(d){
+        //     console.log(d);
+            
+        // }else if(e){
+        //     console.log(e);
+            
+        // }
+            
+        
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수를 정의하고 호출해 보자</title>
+</head>
+<body>
+    <h1>함수를 정의하고 호출해 보자</h1>
+    <ul>
+        <li>function nameName(매개변수){지역 scope} : 함수 정의법</li>
+        <li>함수를 정의하면 코드와 상관없이 자바 스크립트 엔진이
+            함수를 먼저 메모리에 저장하고 코드를 실행
+        (코드는 항상 위에서 아래로 순서대로 실행된다. 때문에 아래서 선언된 것은 호출 불가능)</li>
+        <li>때문에  아래에 정의한 함수를 위에서도 호출할 수 있는 함수 호이스팅 발생한다.</li>
+        <li>(a, b) : 매개변수는 let을 생략하고 지역변수가 된다.</li>
+        <li>{let c=10} : 함수의 지역 변수는 let을 생략하면 안된다.
+            (매개변수와 다른이름 작성)</li>
+        <li>{return} : return을 하면 함수가 종료된다.</li>
+        <li>{return data} : data를 반환하고 함수가 종료된다.</li>
+        <li>{} : return이 없는 함수를 void 함수라 한다.</li>
+
+    </ul>
+    <script>
+        console.log(a); // 코드는 순차적으로 실행되기 때문에 (순차적 언어) 아래의
+        //선언을 위에서 호출 불가능
+        
+
+        var a=10;
+        let x=10;
+        
+        {
+            var b=20;
+            let y=20;
+        }
+        {
+            console.log(b,window.b); //참조 가능 : var의 호이스팅
+            //console.log(y); //정의 되지 않아서 오류
+            
+            
+        }
+
+
+
+
+
+        console.log(""); //log[] 함수
+        //함수를 정의하는 규칙
+        //function 이름 (매개 변수){함수의 영역 scope 지정}
+        //(소괄호:매개변수) {중괄호:scope} [대괄호:Array]
+        //매개변수 : 보낼때는 Parameters (params), 받은 상태를 Argument(argus)
+        function add(a,b){//let을 생략
+                result=a+b;
+                console.log(result);
+
+        }
+        //재사용 : 호출만해도 사용할 수 있는 것(복붙x)
+
+        add(20,30);
+        add(50,55.22);
+
+        console.log(mult (55,99));
+        console.log(Number(55).toString(2)); // tostring ()에 반환값이 정의되어 있다.
+        let c=mult(7,3);
+        let bi=Number(100).toString(2);
+        
+        
+
+        //함수는 밑에 작성해도 위에 호출 가능하다.(함수의 호이스팅)
+        function mult (a,b){
+            return a*b //함수가 종료됨과 동시에 특정 데이터를 반환한다. 
+        }
+
+
+    </script>
+
+</body>
+</html>

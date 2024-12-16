@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논리 연산자로 복잡한 제어문을 작성할 수 있게 하자</title>
+</head>
+<body>
+    <h1>논리 연산자로 복잡한 제어문을 작성할 수 있게 하자</h1>
+    <p>논리 연산은 비트연산과 비슷하다</p>
+    <ul>
+
+        <li>|| Or : 논리의 합 </li>
+        <ul>
+            <li>true || true : true</li>
+            <li>true || false : true</li>
+            <li>false || true : true</li>
+            <li>false || false : false</li>
+            <li>**논리 합은 한 개라도 true 면 모두 true다.</li>
+        </ul>
+        <li>&& And : 논리의 곱</li>
+        <ul>
+            <li>true && true : true</li>
+            <li>true && false : false</li>
+            <li>false && true : false</li>
+            <li>false && false : false</li>
+            <li>**논리 곱은 한 개라도 false 면 모두 false다.</li>
+        </ul>
+    </ul>
+
+    <h2>논리연산과 멈추는 지점</h2>
+    <p>js 엔진은 논리 연산에 참 또는 거짓이 나올거라는 확신이 있다면 다음을 하지 않는다.</p>
+
+
+    <h2>논리 연산의 우선 순위</h2>
+    <p>곱하기>더하기  a || b && c || b && d ==> a || (b && c) || (b && d)</p>
+
+    <p>true || true && false || true && false : true </p>
+    <p>a && b || c && b || d = > (a && b) || (c && b) || d </p>
+    <p>true && false || true && true || false : true</p>
+
+
+
+    <script>
+    console.log(true || true && false || true && false);
+    console.log(true && false || true && true || false);
+    
+
+
+
+        (false || false || false || false || false || false || console.log("안녕"));
+        //연산이 멈추지 않는다면 log가 출력 될거다      
+        
+        (false || false || false || true || false || false || console.log("안녕2"));
+        //true라는 확신이 있으면 다음 연산을 하지 않는다.
+
+
+        (true && true && true && true && true && true && console.log("안녕3"));
+        // false 라는 확신이 있다면 다음 연산을 하지 않는다.
+        (true && true && true && true && false && true && console.log("안녕4"));
+
+
+        //1|1 : 1
+        //1|0 : 1
+        //0|1 : 1
+        //0|0 : 0 : 둘 다 0 이어야 0
+
+        //1&1 : 1
+        //1&0 : 0
+        //0&1 : 0
+        //0&0 : 0 : 하나라도 0이면 0
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHttpRequest와 stutus에 대해 알아봅시다.</title>
+</head>
+<body>
+    <h1>XMLHttpRequest와 stutus에 대해 알아봅시다.</h1>
+    <p><button id="memBtn">멤버json 불러오기</button></p>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>id</th>
+                <th>age</th>
+                <th>married</th>
+            </tr>
+        </thead>
+        <tbody id="memCont">
+
+        </tbody>
+    </table>
+    
+    
+    <h2>onload 와 onreadystatechange</h2>
+    <ul>
+        <li>onload : 통신이 성공한 마지막 시점에만 실행</li>
+        <li>onreadystatechange : 통신을 준비하는 단계부터 종료될때까지 5번 실행
+            하지만 콘솔에는 3번실행됨
+            <ul>
+                <li>readyState 0 : new XMLHttpRequest()</li>
+                <li>readyState 1 : open(method,url)</li>
+                <li>readyState 2 : 
+                    send() =>
+                    request 객체로 통신해서 서버에 요청</li>
+                <li>readyState 3 : 서버에서 요청하는 리소스가 있는지 응답(StatusCode) </li>
+                <li>readyState 4 : 통신성공 == onload => 응답받은 내역을 처리 </li>
+            </ul>
+        </li>
+        <li>status code : 서버가 보내는 리소스의 상태 번호
+            <ul>
+                <li>1-- (101): 웹 소켓통신,메세지 (통신을 계속 유지, 
+                    웹은 문서를 달라면 주고 통신을 끊는데,
+                    소켓 통신은 전화나 채팅처럼 계속 통신을 유지하는 것)</li>
+                <li>2-- (200): 너가 찾는 리소스가 존재하고 내가 너한테 성공적으로 보냈어</li>
+                <li>3-- (302): 너가 찾는 리소스에서 서버내의 다른 리소스로 이동해서 보냈어(redirect)</li>
+                <li>4-- (404): 너가 찾는 리소스가 없어서 </li>
+                <li>5-- (500): 서버에 오류가 있어서 응답할 수 없어, 너가 찾는 리소스가 문제가 있어</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        const memBtn=document.getElementById("memBtn");
+        const memCont=document.getElementById("memCont");
+        memBtn.onclick=(e)=>{
+            const req=new XMLHttpRequest();
+            req.open("GET","../l44members.json");
+            req.onreadystatechange=()=>{
+                //console.log(req.readyState, req.status); //준비단계를 번호로 출력
+                if(req.readyState===4 && req.status===200){
+                    let mems=JSON.parse(req.responseText);
+                    console.log(mems);
+                    let str="";
+                    mems.forEach((mem)=>{
+                        str+=`
+                        <tr>
+                            <td>${mem.name}</td>
+                            <td>${mem.id}</td>
+                            <td>${mem.age}</td>
+                            <td>${ mem.married ? "기혼" : "미혼"}</td>
+                        </tr>
+                        `;
+                        memCont.innerHTML=str;
+                    })
+
+                }
+            }
+            req.send();
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

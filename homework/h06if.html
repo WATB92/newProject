@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제어문 실습</title>
+</head>
+<body>
+    <h1>제어문 실습</h1>
+    <ul>
+        <li>let num=-7 음수인지 양수인지 알려주는 제어문을 작성하세요.</li>
+        <li>위 수를 prompt로 받으세요</li>
+        <li>let score=87; let grade=null; grade를 score에 맞게 참조 시키세요
+            (100 90 A) (90 80 B) (80 70 C) (70 60 D) (나머지는 F) else if
+        </li>
+    </ul>
+    <script>
+        /*if(조건식){
+            조건식의 결과 true이면 실행되는 블럭
+        }
+
+        if (조건식) {
+            
+        }else{
+            조건식의 결과가 false이면 실행되는 블럭
+        }*/
+
+
+        let num=-7
+
+        if (0>num) {
+            console.log("음수 입니다");
+        }
+
+        if (0==num) {
+            console.log("0");
+        }
+
+        if (0<num) {
+            console.log("양수 입니다");
+        }
+
+
+
+
+    //     let su=prompt("수를 입력하면 양수인지 음수인지를 알려줍니다.")
+    // if (su<0) {
+    //     alert("음수 입니다.")
+    // }else if(su>0){
+    //     alert("양수 입니다.")
+    // }else{
+    //     alert("0")
+    // }
+
+    // //  let su =prompt("수를 입력하면 양수인지 음수인지를 알려줍니다.")
+    // if(su>=0){// > < 비교 연산 ,+를 제외한 수학 연산을 하면 자동으로 수로 현변환 한다.
+    //     if(su==0){
+    //         alert("0");
+    //     }else{
+    //         alert("양수");
+    //     }
+    // }else{
+    //     alert("음수");
+    // }    
+    
+
+
+    let score = 55
+    //함수(gradesystem)로 변경(과제) 매개변수는 score 반환 값은 grade
+    //=> 타입으로 gradesystem (score,grade 필드가 있는)
+    let grade = null
+
+    if (score >=90) {
+        grade = "A"
+        
+    }else if(score>=80 ) {
+        grade = "B"
+    }else if (score>=70) {
+        grade = "C"
+    } else if(score>=60){
+        grade = "D"
+    }else if(score>=0){
+        grade = "F"
+    }else {
+        grade ="점수가 아닙니다"
+        
+    }
+    
+    console.log(grade);
+    
+    //////////////////////////////////////
+    let grade2 = null
+    if(score>=90 && score<=100){
+        grade2 ="a"
+    }
+    if(score>=80 && score<90){
+        grade2 ="b"
+    }
+    if(score>=70 && score<80){
+        grade2 ="c"
+    }
+    if(score>=60 && score<70){
+        grade2 ="d"
+    }
+    if(score>=0 && score<60){
+        grade2 ="f"
+    }
+
+    console.log(grade2);
+
+
+
+
+
+    // gradesystem()
+    // function gradesystem(){
+    //     let AA = ((score>=90 && score<=100)="a") 
+    //     let B = ((score>=80 && score<90)="b") 
+    //     let C = ((score>=70 && score<80)="c")
+    //     let D =((score>=60 && score<70) ="d")
+    //     let F = ((score>=0 && score<60)="f")
+    //     let grade3 =(A,B,C,D,F)
+        
+
+    // }
+    // console.log(grad3);
+    
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 반복문</title>
+</head>
+<body>
+    <h1>조건식이 존재하는 반복문 for</h1>
+    <p>for( 선언문; 조건식; 증감식;){} : for(let i=0; i < size; i++){} </p>
+    <h2>배열을 참조하는 for 공식</h2>
+    <ul>
+        <li>let arr=[a,b .... c] </li>
+        <li>for(let i=0; i < arr.length; i++){  arr[i]; } </li>
+        <li>for(let i=(arr.length-1); i >= 0; i--){ arr[i]; }</li>
+    </ul>
+
+
+
+    <script>
+        //while 반복문은 무언가를 무한히 일을 시키고 싶을 때 작성합니다.
+        //while(true){}
+        let a;
+
+        let arr=[1,"이",null,"4",undefined]; //배열중에 문자열을 찾아서 삭제하세요.
+        
+        //Boolean(0,NaN)->false
+        //반복문을 모르는 경우
+        //isNaN(data) : data가 수로 형변환되면 false 안되면 true (null,""=>0 주의)
+
+        //Number.isNaN(Number(data)) : NaN이면 true 아니면 false (형변환 없음)
+        console.log(Number(arr[0]),Number(arr[2]),isNaN(arr[2]),Number(undefined),isNaN(undefined));
+        
+        //검사식(모든 것을 다 검사할때 if를 늘어놓고 사용합니다.)
+        //pop() 뒤에서 부터 빼는 함수
+        if(isNaN(arr[0])){
+          arr.splice(0,1);
+        }
+        if(isNaN(arr[1])){
+            arr.splice(1,1);
+        }
+        if(isNaN(arr[2])){
+            arr.splice(2,1);
+        }
+        if(isNaN(arr[3])){
+            arr.splice(3,1);
+        }
+        if(isNaN(arr[4])){
+            arr.splice(4,1);
+        }
+        //console.log(arr.splice(2,2));//['삼',4]
+        
+        console.log(arr);
+        
+
+
+        let arr2=[1,2,3,4,"오",6,7,"팔",9,10,11,12,13]; 
+        //숫자가 안되는 것을 삭제하세요!
+        let length=arr2.length;
+        
+        console.log(arr2);
+        /*
+        let i=0;//선언문
+        while(i<length){ //조건식
+            if(isNaN(arr2[i])){
+                arr2.splice(i,1);
+            }
+            i++; //증감문
+        }
+        console.log(arr2);
+        */
+
+        //위의 조건식을 공식처럼 사용하는 for
+        //for(선언문(초기문:처음한번만 동작);조건식;증감문)
+
+        for(let i=0; i<arr2.length; i++){
+            if(isNaN(arr2[i])) arr2.splice(i,1);
+        }
+        console.log("for 반복문");
+        console.log(arr2);
+        
+        
+
+
+    </script>
+</body>
+</html>

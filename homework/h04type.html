@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>type과 class 그리고 객체 실습</title>
+</head>
+<body>
+    <h1>type과 class 그리고 객체 실습</h1>
+    <ul>
+        <li>new String("안녕") ,new number(55): 이때 "안녕"과 55는 무엇의
+            무슨 값이라고 부를 수 있나요? 필드값</li>
+            <!-- 객체의 초기값 -->
+        <li>자동차(car) 클래스를 만들고 싶은데 필드로 이름(name)과 모델 번호(modelNum)를
+            초기값으로 갖게 정의하세요.
+        </li>
+        <li>자동차 클래스로 객체를 생성하고 콘솔에 출력해 보세요.</li>
+        <li>자동차 클래스의 생성자에 매개변수로 이름을 받고 필드로 정의한 이름을
+            매개 변수 값으로 바꾸세요.
+            :생성자로 이름의 초기값을 정의하세요.(만들 때 이름이 다른차면 좋겠다.)
+        </li>
+        <li>자동차 클래스를 만들때 이름을 변경해서 생성해 보고 콘솔에 출력도 해보세요</li>
+    </ul>
+
+<script>
+     class NameName{}
+
+    let = new String("안녕");
+    let = new Number(55);
+    console.log(new Number,new String);
+
+
+    class car {
+            // constructor(i,g){ 
+            
+            // this.name=i 
+            // this.modelNum=g
+            
+            // }}
+            // let c=new car()
+            // console.log(c);
+
+ 
+            // let i = prompt("차 명")
+        
+            // let g = prompt(" 모델번호")
+        
+            // console.log(new car(i,g));
+
+            
+            
+            //생성자 :constructor
+            constructor(name,modelNo){//파이썬 __init 
+            
+            this.name=name;
+            this.modelNo=modelNo
+            }
+            move(x,y){
+                console.log("움직인다.");
+                
+            }
+            stop() {
+                console.log("멈춘다.");
+                
+            }
+
+            }
+        
+            //new는 객체를 생성하는 연산자 (실행후 결과를 반환) 이다.
+            //new Car() ; //Car() == Car.constructor()
+            console.log(new car()); //name=undefined
+            console.log(new car("둘리의 차","g90"));
+            console.log(new car("이재덕의 차","bmw"));
+            
+            
+            
+
+            //Car 상속 받아서 BMWCar class를 만드세요. BMWCar price필드를 정의 하시오.
+            
+            class BMWcar extends car{
+                constructor(name,modelNo,price){
+                    super(name,modelNo);
+                    
+            
+                    this.price=price;
+                }
+            }
+
+                console.log(new BMWcar("bmw","30","300000"));
+
+
+
+
+            class BMWCar2 extends car{
+
+            }
+            let bmw = new BMWCar2()
+            console.log(bmw);
+            let bmw2 =new BMWCar2 ("싱싱이", "3434");
+            //상속 받으면 상속 받은 부모의 생성자도 호출 된다.
+            //자식이 생성자를 정의하지 않으면 부모의 생성자를 호출 해야한다.
+            console.log(bmw2);
+
+
+
+
+            class KiaCar extends car{
+                constructor(name,modelNo,price){
+                    super(name,modelNo,price);
+                    this.price=price;
+                    //super()==super(undefined,undefined)
+
+                }
+            }
+            //객체를 생성할때는 무조건 (선택x) 부모 생성자가 (먼저)호출 되도록 설계해야한다.
+            let kiaCar= new KiaCar("중고k3","k3","900")
+            console.log(kiaCar);
+            
+        
+            
+            
+                
+
+
+
+
+           
+            
+            
+
+
+            
+
+
+
+
+
+
+</script>
+</body>
+</html>
